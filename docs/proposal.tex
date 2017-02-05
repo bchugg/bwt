@@ -1,0 +1,60 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+\begin{center}
+\Large\textbf{BWT-RNA: A preprocessing step for RNA folding algorithms}\\
+\vspace*{0.8cm}
+\large 
+Ben Chugg \qquad
+Coulter Beeson \qquad
+Kenny Drabble \qquad
+Jeffrey Jeyachandren 
+\end{center}
+\vspace*{0.5cm}
+\section{Introduction and Background}
+
+Ribonucleic acids (RNA) play a crucial role in all living organisms, serving both as information storage as well as providing catalytic activity. Given their diverse functions, RNA come in many different varieties, such as mRNA encoding genetic information for translation into proteins, tRNA for the mapping of codons to amino acids, and ribozymes with catalytic activity such as ribosomes and spliceosomes (\cite{eight}\cite{nine}\cite{ten}), as well as numerous other less understood forms. As opposed to DNA, which is double stranded, RNA is often single stranded and forms - usually complex -  three dimensional structures by pairing with itself. As with proteins, the three dimensional structure of RNA is critical to its function, and structural prediction is a natural first step when aiming to ascribe function to a given RNA, as well as in the construction of synthetic sequences with novel properties ( \cite{one},\cite{two}). 
+
+To predict the three dimensional structure of a given RNA sequence it is often necessary to first determine the secondary structure. RNA, as with proteins, will adopt structure(s) that minimize their total energy. The major stabilizing interaction for RNA comes from their intramolecular base pairing. That is, sequences of similar length base pair internally with other near palindromic sequences \cite{three}. Accordingly, most algorithmic approaches seek to maximize the number of these base pairings. Alternatively some approaches aim to measure other energetic interactions between bases, such as base stacking, and search for a structure of minimal global energy (\cite{four},\cite{five},\cite{eight}). Regardless of the approach used, most modern RNA folding algorithms use a similar recurrence that is amenable to dynamic programming. 
+
+Although dynamic programming is optimal under a specific scoring model, for many biological applications it is still too slow to be practical. While heuristic approaches are often faster they find only approximate solutions. Base pairing and energy minimization models both use the same recurrence, so any improvements at this level will likely find widespread use. 
+ Given that the same recurrence is used in both base pairing and energy minimization models any improvements at this level will likely find widespread use.
+
+Our proposal is to use BWT-SW: a new variant of the Smith-Waterman (SW) local 
+alignment algorithm developed by Lam et. al. \cite{four} that has been optimized using the Burrow- Wheeler Transform (BWT) (\cite{six},\cite{seven}). By first considering local alignments of the RNA sequence with itself as a preprocessing step we hope to identify highly probable regions of intramolecular base pairing to limit the search space for subsequent secondary structure prediction techniques.
+
+
+\section{Proposal}
+	
+To test the efficacy of this approach we intend to implement variant of RNA secondary structure prediction, BWT-RNA, that aims to maximize the number of complementary base pairing interactions. It will carry out local alignment on a single RNA strand by pairing the strand with itself, with the scoring matrix chosen to induce palindromic-like matches. A certain number of the highest scoring matching regions will be assumed to be in a hairpin structure, and the rest of the strand will then be analyzed using a typical RNA folding algorithm. Local alignment will be implemented with the BWT-SW - a subroutine to speed up Smith-Waterman. The goal BWT-RNA is to prune the search space by pairing obvious regions in order to speed up the execution time of typical RNA folding algorithms. 
+
+BWT-RNA will be tested against a control which will implement the typical dynamic programming recurrence used for RNA pairing (\cite{three}).  These approaches will be compared both in their ability to find the optimal structure, and on how quickly they can produce structural predictions for sequences of varying length. While the main interest lies in examining the effectiveness of BWT-RNA, we will also implement a version of Smith-Waterman which does not use RNA in order to determine if the BWT significantly speeds up the local alignment preprocessing. 
+
+It is possible that the globally optimal structure does not include any of the highly probable regions, and thus our approach may best be considered a heuristic approach. Additionally, the pre-processing may take more time than is saved in the subsequent structure search. To benchmark the efficacy of this approach we will compare the time it takes to analyze datasets of various size both with and without BWT-SW pre-processing. 
+
+
+\section{Analyses and Expected Results}
+
+	Given the complexity of RNA folding, heuristic and approximation algorithms do not easily lend themselves to provable results. Therefore, most of our comparisons will be experimental in nature.  However, analytic methods will also be applied in an attempt to estimate runtime analysis and generate approximation ratios. 
+
+\subsection{Experimental Analysis}
+
+In BWT-RNA, there will a question of how many (disjoint) local alignments should be matched as hairpin structures before passing off the data to another folding algorithm. By comparing against known RNA foldings, we will attempt to determine this number experimentally. Presumably, this number will be a function of the strand length and potentially the relative cardinalities of the base pairs. Furthermore, typical RNA folding algorithms are unable to predict pseudoknots (\cite{twelve}) so we will examine whether our suggested approach is able to do so. 
+
+\subsection{Analytic Analysis}
+	
+	Of course, the main question is whether BWT-RNA is provably optimal (or provably worse). We will also consider the possibility that it is within an approximation factor of the control. Furthermore, we will attempt to determine the asymptotic difference between local alignment using and not using BWT. 
+
+If time allows, we would also like to consider the following question: Given a data set of RNA which is too big to hold on one machine, does BWT-RNA lend itself to a map-reduce model of parallel computing? If so, does it require a randomized approach or can it be done deterministically? 
+
+\section{Concluding Remarks}
+
+It is our prediction that this approach will not be optimal, and would best be considered a heuristic approach. However, this is likely not an issue as most scoring models fail to capture all interactions and are not guaranteed to produce the correct biologically active structure regardless.
+
+\bibliographystyle{plain}
+\bibliography{ref.bib}
+
+
+\end{document}
