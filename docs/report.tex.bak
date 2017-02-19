@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+\begin{center}
+\Large\textbf{BWT-RNA: A preprocessing step for RNA folding algorithms}\\
+\vspace*{0.8cm}
+\large 
+Ben Chugg \qquad
+Coulter Beeson \qquad
+Kenny Drabble \qquad
+Jeffrey Jeyachandren 
+\end{center}
+\vspace*{0.3cm}
+
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+
+Ribonucleic acids (RNA) play a crucial role in all living organisms, serving both as information storage as well as providing catalytic activity. Given their diverse functions, RNA come in many different varieties, such as mRNA encoding genetic information for translation into proteins, tRNA for the mapping of codons to amino acids, and ribozymes with catalytic activity such as ribosomes and spliceosomes (\cite{eight}\cite{nine}\cite{ten}), as well as numerous other less understood forms. As opposed to DNA, which is double stranded, RNA is often single stranded and forms - usually complex -  three dimensional structures by pairing with itself. As with proteins, the three dimensional structure of RNA is critical to its function, and structural prediction is a natural first step when aiming to ascribe function to a given RNA, as well as in the construction of synthetic sequences with novel properties ( \cite{one},\cite{two}). 
+
+To predict the three dimensional structure of a given RNA sequence it is often necessary to first determine the secondary structure. RNA, as with proteins, will adopt structure(s) that minimize their total energy. The major stabilizing interaction for RNA comes from their intramolecular base pairing. That is, sequences of similar length base pair internally with other near palindromic sequences \cite{three}. Accordingly, most algorithmic approaches seek to maximize the number of these base pairings. Alternatively some approaches aim to measure other energetic interactions between bases, such as base stacking, and search for a structure of minimal global energy (\cite{four},\cite{five},\cite{eight}). Regardless of the approach used, most modern RNA folding algorithms use a similar recurrence that is amenable to dynamic programming. 
+
+Although dynamic programming is optimal under a specific scoring model, for many biological applications it is still too slow to be practical. While heuristic approaches are often faster they find only approximate solutions. Base pairing and energy minimization models both use the same recurrence, so any improvements at this level will likely find widespread use. 
+ Given that the same recurrence is used in both base pairing and energy minimization models any improvements at this level will likely find widespread use.
+
+Our proposal is to use BWT-SW: a new variant of the Smith-Waterman (SW) local 
+alignment algorithm developed by Lam et. al. \cite{four} that has been optimized using the Burrow- Wheeler Transform (BWT) (\cite{six},\cite{seven}). By first considering local alignments of the RNA sequence with itself as a preprocessing step we hope to identify highly probable regions of intramolecular base pairing to limit the search space for subsequent secondary structure prediction techniques.
+
+\section{Preliminaries}
+
+\section{Results}
+
+\section{Analysis}
+
+\section{Extensions}
+
+\section{Final Remarks}
+
+\bibliographystyle{plain}
+\bibliography{ref.bib}
+
+
+\end{document}

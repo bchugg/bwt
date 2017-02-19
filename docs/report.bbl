@@ -1,0 +1,56 @@
+\begin{thebibliography}{10}
+
+\bibitem{ten}
+Jamie~H Cate, Anne~R Gooding, Elaine Podell, Kaihong Zhou, and et~al.
+\newblock Crystal structure of a group i ribozyme domain: Principles of rna
+  packing.
+\newblock {\em Science}, 273:5282:1678--1685, 1996.
+
+\bibitem{eight}
+Jennifer~A Doudna and Jon~R Lorsch.
+\newblock Ribozyme catalysis: not different, just worse.
+\newblock {\em Nature Structural and Molecular Biology}, 12:395--402, 2005.
+
+\bibitem{three}
+Sean~R Eddy.
+\newblock How do rna folding algorithms work?
+\newblock {\em Nature Biotechnology}, 22:1457--1458, 2004.
+
+\bibitem{two}
+Zemora Georgeta and Christina Waldsich.
+\newblock Rna folding in living cells.
+\newblock {\em RNA Biology}, 7.6:634–641, 2010.
+
+\bibitem{four}
+T.W. Lam, W.K. Sung, S.L. Tam, C.K. Wong, and S.M. Yiu.
+\newblock Compressed indexing and local alignment of dna.
+\newblock {\em Bioinformatics}, 24:6:791--797, 2008.
+
+\bibitem{seven}
+Heng Li and Richard Durbin.
+\newblock Fast and accurate long-read alignment with burrows-wheeler transform.
+\newblock {\em Bioinformatics}, 36:5:589--595, 2010.
+
+\bibitem{six}
+Giovanni Manzini.
+\newblock An analysis of the burrows-wheeler transform.
+\newblock {\em Journal of the Association for Computing Machinery},
+  48:3:407--430, 2001.
+
+\bibitem{five}
+David~H Mathews and Douglas~H Turner.
+\newblock Prediction of rna secondary structure by free energy minimization.
+\newblock {\em Current Opinion in Structural Biology}, 16:3:270--278, 2006.
+
+\bibitem{nine}
+Markus~C Wahl, Cindy~L Will, and Reinhard Lurhmann.
+\newblock The spliceosome: Design principles of a dynamic rnp machine.
+\newblock {\em Cell}, 136:4:701--718, 2009.
+
+\bibitem{one}
+Christian~Höner zu~Siederdissena, Stephan~H. Bernhart, Peter~F. Stadler, and
+  Ivo~L. Hofacker.
+\newblock A folding algorithm for extended rna secondary structures.
+\newblock {\em Bioinformatics}, 27, 2011.
+
+\end{thebibliography}
