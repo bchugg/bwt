@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 from r_fold import RNA_Fold as RF
 
 seq = "GGGAAAUCC"

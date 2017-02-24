@@ -163,13 +163,10 @@ class localAlign:
 		"""
 		align = ["", ""]
 		table = self.Mp
-		print self.M
 		score = np.max(self.M)
 		am = np.argmax(self.M)
-		print "ARGMAX M::"
 		j = am % self.M.shape[1]
 		i = am / self.M.shape[1]
-		print "i=", i, "j=", j
 		while True:
 			if table == self.Mp:
 				if table[i][j] == 'GX':

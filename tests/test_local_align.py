@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 from local_align import localAlign as LA
 
 """ 
@@ -9,22 +11,11 @@ Test File for local_align.py
 TEST 1
 Perfect matches
 """
-# seq1 = "AAAARRRRNNNNNDDDDDD"
-# seq2 = "AAAARRRRNNNNNDDDDDD"
+seq1 = "AAAARRRRNNNNNDDDDDD"
+seq2 = "AAAARRRRNNNNNDDDDDD"
 
-# align = LA(seq1, seq2)
-# align.kOptimalAlignments(1)
-# align.printAlignment()
-
-
-""" 
-Test
-"""
-
-seq1 = "AAAA"
-seq2 = "AAAAA"
 align = LA(seq1, seq2)
-align.kOptimalAlignments(2)
+align.kOptimalAlignments(1)
 align.printAlignment()
 
 
