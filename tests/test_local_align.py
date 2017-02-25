@@ -1,43 +1,22 @@
 import sys
 sys.path.append('../')
+from local_align import disjointAlignments as DA
 from local_align import localAlign as LA
 
 """ 
-Test File for local_align.py
+Test File for local_align module
 """ 
 
-
-""" 
-TEST 1
-Perfect matches
 """
-seq1 = "AAAARRRRNNNNNDDDDDD"
-seq2 = "AAAARRRRNNNNNDDDDDD"
-
-align = LA(seq1, seq2)
-align.kOptimalAlignments(1)
-align.printAlignment()
-
+Tests for localAlign class
+"""
 
 """
-TEST 2
-Matches with gaps
-"""
-seq1 = "AAAADDDDDDRRRRDDDDDNNNNNFFFFFFDDDDDD"
-seq2 = "AAAAFFFFFFRRRRFFFFFNNNNNDDDDDDDDDDDD"
-align = LA(seq1, seq2)
-align.kOptimalAlignments(4)
-align.printAlignment()
-
-
-
-"""
-TEST 3
 Tests provided with assignment 2 
 (Uses Protein sequences)
 """
 
-# # OSXR1_HUMAN in uniprot data
+# OSXR1_HUMAN in uniprot data
 seq1 = ("MSEDSSALPWSINRDDYELQEVIGSGATAVVQAAYCAPKKEKVAIKRINLEKCQTSMDEL"
 	"LKEIQAMSQCHHPNIVSYYTSFVVKDELWLVMKLLSGGSVLDIIKHIVAKGEHKSGVLDE"
 	"STIATILREVLEGLEYLHKNGQIHRDVKAGNILLGEDGSVQIADFGVSAFLATGGDITRN"
@@ -60,8 +39,8 @@ seq2 = ("MDDYMVLRMIGEGSFGRALLVQHESSNQMFAMKEIRLPKSFSNTQNSRKEAVLLAKMKHP"
 	"FEEEDDNPDWVSELKKRAGWQGLCDR")
 
 align = LA(seq1, seq2)
-align.kOptimalAlignments(1)
-align.printAlignment()
+align.computeAlignment()
+LA.printAlignment(align.align_info)
 
 seq2 = ("MSLCGARANAKMMAAYNGGTSAAAAGHHHHHHHHLPHLPPPHLHHHHHPQHHLHPGSAAA"
 	"VHPVQQHTSSAAAAAAAAAAAAAMLNPGQQQPYFPSPAPGQAPGPAAAAPAQVQAAAAAT"
@@ -74,7 +53,33 @@ seq2 = ("MSLCGARANAKMMAAYNGGTSAAAAGHHHHHHHHLPHLPPPHLHHHHHPQHHLHPGSAAA"
 	"IHQFILEQQKGNRVPLCINPQSAAFKSFISSTVAQPSEMPPSPLVWE")
 
 align = LA(seq1, seq2)
-align.kOptimalAlignments(1)
-align.printAlignment()
+align.computeAlignment()
+LA.printAlignment(align.align_info)
+
+
+"""
+Tests for DisjointAlignment Class
+"""
+
+""" 
+Perfect matches
+"""
+seq1 = "AAAARRRRNNNNNDDDDDD"
+seq2 = "AAAARRRRNNNNNDDDDDD"
+
+align = DA(seq1, seq2)
+align.kAlignments(1)
+align.printAlignments()
+
+
+"""
+Matches with gaps
+"""
+seq1 = "AAAADDDDDDRRRRDDDDDNNNNNFFFFFFDDDDDD"
+seq2 = "AAAAFFFFFFRRRRFFFFFNNNNNDDDDDDDDDDDD"
+align = DA(seq1, seq2)
+align.kAlignments(4)
+align.printAlignments()
+
 
 
