@@ -63,12 +63,12 @@ class RNA_Fold():
 
   def f_iter(self):
     #base
-    for i in xrange(self.n):
+    for i in range(self.n):
       self.F[i][i] = 0
       self.F[i][i-1] = 0
 
-    for g in xrange(1,self.n):
-      for i in xrange(self.n-g):
+    for g in range(1,self.n):
+      for i in range(self.n-g):
         j = i + g
         case1 = self.F[i+1][j]
         case2 = self.F[i][j-1]
@@ -76,7 +76,7 @@ class RNA_Fold():
         case4 = 0
         if self.complements(self.rna[i], self.rna[j] ):
           case3 = self.F[i+1][j-1] + 1 
-        for k in xrange(j-i):
+        for k in range(j-i):
           s = self.F[i][i+k] + self.F[i+k+1][j]
           if( s > case4):
             case4 = s
