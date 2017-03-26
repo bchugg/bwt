@@ -25,7 +25,7 @@ class RNA_Fold():
     self.n = len(s)
     self.F = [[ '!' for i in range(self.n) ] for j in range(self.n) ]
 
-    return self.f(0,self.n-1)
+    return self.f_iter()
 
 
   def f(self,i,j):
@@ -40,9 +40,10 @@ class RNA_Fold():
       return self.F[i][j]
 
     #Base Case 1) no bases can be aligned
-    if( i == j or i == j-1):
+    if( i >= j or i == j-1):
       self.F[i][j] = 0
       return self.F[i][j]
+
 
     case1 = self.f(i+1,j)
     case2 = self.f(i,j-1)
@@ -59,6 +60,30 @@ class RNA_Fold():
 
     self.F[i][j] = max(case1, case2, case3, case4)
     return self.F[i][j]
+
+  def f_iter(self):
+    #base
+    for i in xrange(self.n):
+      self.F[i][i] = 0
+      self.F[i][i-1] = 0
+
+    for g in xrange(1,self.n):
+      for i in xrange(self.n-g):
+        j = i + g
+        case1 = self.F[i+1][j]
+        case2 = self.F[i][j-1]
+        case3 = 0
+        case4 = 0
+        if self.complements(self.rna[i], self.rna[j] ):
+          case3 = self.F[i+1][j-1] + 1 
+        for k in xrange(j-i):
+          s = self.F[i][i+k] + self.F[i+k+1][j]
+          if( s > case4):
+            case4 = s
+
+        self.F[i][j] = max(case1, case2, case3, case4)
+
+    return self.F[0][self.n-1]
 
   def complements(self,x, y):
     """
