@@ -9,7 +9,7 @@ class RNA_Fold():
   def __init__(self, s=""):
     self.rna = s
     self.n = len(s)
-    self.F = [[ '!' for i in xrange(self.n) ] for j in xrange(self.n) ]
+    self.F = [[ '!' for i in range(self.n) ] for j in range(self.n) ]
 
 
   def fold(self,s):
@@ -23,7 +23,7 @@ class RNA_Fold():
     """
     self.rna = s
     self.n = len(s)
-    self.F = [[ '!' for i in xrange(self.n) ] for j in xrange(self.n) ]
+    self.F = [[ '!' for i in range(self.n) ] for j in range(self.n) ]
 
     return self.f(0,self.n-1)
 
@@ -52,7 +52,7 @@ class RNA_Fold():
     if(self.complements( self.rna[i], self.rna[j] )):
       case3 = self.f(i+1,j-1) + 1
 
-    for k in xrange(j-i):
+    for k in range(j-i):
       s = self.f(i,i+k) + self.f(i+k+1,j)
       if(s > case4):
         case4 = s
@@ -89,9 +89,9 @@ class RNA_Fold():
       line += c + " "*space
     print(line)
     line = ""
-    for j in xrange(self.n):
+    for j in range(self.n):
       line += self.rna[j] + " "*space
-      for i in xrange(self.n):
+      for i in range(self.n):
         line += str(self.F[j][i]) + " "*space
       print(line)
       line = ""

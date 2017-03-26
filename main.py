@@ -1,7 +1,9 @@
 # Dependencies
 import sys
-from r_fold.py import RNA_FOLD as RNA_FOLD
-from local_align.py import localAlign as LA
+from local_align import disjointAlignments as DA
+from local_align import localAlign as LA
+from r_fold import RNA_Fold as RF
+
 
 """
 Main File for running BWT_RNA
@@ -30,3 +32,9 @@ together.
 
 
 """
+
+
+	
+
+
+

@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from params import score_matrix, alphabet, d, e
-from Queue import Queue
+from queue import Queue
 
 
 """
@@ -15,7 +15,7 @@ alignment problem
 Global Vars
 """
 # minimum score
-ms = -1*sys.maxint
+ms = -1*sys.maxsize
 # score matrix
 sm = score_matrix
 
@@ -42,21 +42,24 @@ class disjointAlignments:
 		q = Queue()
 		q.put([self.x, self.y])
 		
+		print(k)
+		print(not q.empty())
 		while k > 0 and not q.empty():
 			subs = q.get()
 			align = localAlign(subs[0], subs[1])
 			align.computeAlignment()
+			print("Computed an optimal alignment")
 			self.alignments[self.k-k] = align.align_info
 			self.splitAlignments(align.align_info, subs[0], subs[1], q)
 			k -= 1
 
 		if k != 0:
 			opt = self.k-k
-			print "\nWarning: Unable to find",self.k,"optimal alignments"
-			print "Number of alignments found:",opt
-			print "Resetting Optimal k to",opt,
+			print("\nWarning: Unable to find",self.k,"optimal alignments")
+			print("Number of alignments found:",opt)
+			print("Resetting Optimal k to",opt, end='')
 			self.k = opt
-			print "... ... DONE\n"
+			print("... ... DONE\n")
 
 
 
@@ -83,7 +86,7 @@ class disjointAlignments:
 			q.put([start_s1, start_s2])
 
 
-	
+
 	def printAlignments(self, index=""):
 		""" 
 		Print Alignment. If index argument specified, print only 
@@ -203,7 +206,7 @@ class localAlign:
 		score = np.max(self.M)
 		am = np.argmax(self.M)
 		j = am % self.M.shape[1]
-		i = am / self.M.shape[1]
+		i = int(am / self.M.shape[1])
 		while True:
 			if table == self.Mp:
 				if table[i][j] == 'GX':
@@ -237,14 +240,14 @@ class localAlign:
 		"""
 		Print single alignment
 		"""
-		print "SCORE: ", alignment[3]
-		print "Index of x:", alignment[1], 
-		print "Index of y:", alignment[2]
-		print "Alignment: "
-		print "x: ",
-		print alignment[0][0][0:60]
-		print "y: ",
-		print alignment[0][1][0:60]
+		print("SCORE: ", alignment[3])
+		print("Index of x:", alignment[1], end='') 
+		print("Index of y:", alignment[2])
+		print("Alignment: ")
+		print("x: ", end='')
+		print(alignment[0][0][0:60])
+		print("y: ", end='')
+		print(alignment[0][1][0:60])
 
 
 

@@ -2,7 +2,14 @@ import numpy as np
 
 #Parameters file
 
-#Use BLOSUM50 as the scoring matrix
+# alphabet = ['C', 'G', 'U', 'A']
+# score_matrix = np.matrix([
+# 	[0,1,0,0],
+# 	[1,0,0,0],
+# 	[0,0,0,1],
+# 	[0,0,1,0]])
+
+Use BLOSUM50 as the scoring matrix
 alphabet = ['A','R','N','D','C','Q','E','G','H','I','L','K','M',
  				'F','P','S','T','W','Y','V','B','J','Z','X','*']
 
