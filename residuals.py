@@ -18,7 +18,6 @@ class residuals:
 		in any alignment, given list of indices of subsequences
 		"""
 		xrep = [ "free" for _ in range(len(self.x)) ]
-		
 		#Mark xrep
 		for ind in inds:
 			if xrep[ind[0]] == "free":
@@ -26,7 +25,6 @@ class residuals:
 			else:
 				if xrep[ind[0]] < ind[1]:
 					xrep[ind[0]] = ind[1]
-
 		residuals = []
 		left = 0
 		while left < self.n:
@@ -37,9 +35,11 @@ class residuals:
 				left += 1
 				if left == self.n : break
 			else:
-				if len(partial)>0 : residuals += [[partial]]
+				if len(partial)>0 : 
+					residuals += [[partial]]
+					partial = ""
 				left = left + 1 if left == xrep[left] else xrep[left]
-		if left == self.n : residuals += [[partial]]
+		if len(partial) >0 : residuals += [[partial]] 
 		self.residuals = residuals
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from operator import itemgetter
-from params import score_matrix, alphabet, d, e
+from params import score_matrix, alphabet
 from queue import Queue
 
 
@@ -42,10 +42,9 @@ class localAlignRNA:
 		sequences x and y. Return alignment, indices, and score
 		"""
 		# Initialize 
-		n = self.n 
-		m = self.n 
-		self.M = np.zeros((m,n))
-		for i in range(1, m):
+		n = self.n  
+		self.M = np.zeros((n,n))
+		for i in range(1, n):
 			b = self.findIndex(i-1,self.y)
 			for j in range(1, n):
 				a = self.findIndex(j-1,self.x)

@@ -45,4 +45,15 @@ res = residuals(x)
 res.getResiduals(inds)
 print(res.residuals)
 
+"""
+Test 4
+"""
+print('Test 4')
+x = "XXXXXYYYYYYYXXXXXXXXXX"
+inds = [[0,5], [10,len(x)]]
+res = residuals(x)
+res.getResiduals(inds)
+print(res.residuals)
+
+
 

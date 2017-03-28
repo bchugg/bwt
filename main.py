@@ -1,9 +1,9 @@
-# Dependencies
 import sys
 import numpy as np
-from local_align import disjointAlignments as DA
-from local_align import localAlign as LA
+from disjoint_alignments import disjointAlignments as DA
 from r_fold import RNA_Fold as RF
+from residuals import residuals
+from functools import reduce
 
 
 """
@@ -33,6 +33,9 @@ seq = "UAUAUAUAUAGCAUGAGUGUCGCGCGCGC"
 k = 2
 sep = '*'*60 + '\n'
 
+print(sep)
+print(' '*12, 'RNA FOLDING USING LOCAL ALIGNMENT\n')
+
 # Find k optimal alignments between seq and itself
 align = DA(seq)
 align.kAlignments(k)
@@ -40,42 +43,46 @@ align.kAlignments(k)
 print(sep)
 print('Step 1: K-OPTIMAL LOCAL ALIGNMENTS\n')
 align.printAlignments()
+local_score = DA.scoreAlignments(align.alignments)
+print('RNA FOLDING SCORE:', local_score)
 print(sep)
+
 
 # Pass leftover sequences into RNA folding. 
 print('Step 2: PASS UNMATCHED SEQUENCES TO RNA FOLDER\n')
+inds1 = list(map(lambda x: x[0], align.alignments))
+inds2 = list(map(lambda x: x[1], align.alignments))
+inds = inds1 + inds2
 
-leftovers = [[]]
-newseq = seq
-cumul_ind = 0
-for i in range(align.k):
-	cut = align.alignments[i][0][0]
-	if len(cut) > 0:
-		ind = newseq.find(cut)
-		leftovers += [[newseq[:ind], cumul_ind]]
-		cumul_ind += ind + len(cut)
-		newseq = newseq[ind+len(cut):]
-if len(newseq) != 0:
-	leftovers = np.append(leftovers, [])
+res = residuals(seq)
+res.getResiduals(inds)
+print('Residual subsequences:')
+print(res.residuals, '\n')
 
-if np.size(leftovers) >0:
-	print('Leftover Sequences to be passed into RNA Folding:')
-	for i in range(1,np.size(leftovers)):
-		s = leftovers[i][0]
-		l = leftovers[i][1]
-		print('Sequence:')
-		print(s)
-		print('Index: ', l, '-', l+len(s))
-else:
-	print('No unmatched regions found.')
+res_score = 0
+for r in res.residuals:
+	rf = RF()
+	rf.fold(r[0])
+	res_score += rf.F[0][len(rf.F[0])-1]
 
+print('Score from RNA folding on residuals:', res_score)
+print(sep)
 
-# Run RNA folding on Leftovers 
+# Score comparison
+print('STEP 3: COMPARE SCORES FROM BOTH METHODS\n')
+total_score = res_score + local_score
 rf = RF()
-for i in range(1,np.size(leftovers)):
-	if len(leftovers[i][0]) != 0:
-		rf.fold(leftovers[i][0])
-		rf.print_F()
+rf.fold(seq)
+rna_score = rf.F[0][len(rf.F[0])-1]
+
+print('Score of this method:', total_score)
+print('Score of typical RNA folding', rna_score)
+
+
+
+
+
+
 
 
 
