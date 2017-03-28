@@ -113,6 +113,7 @@ class disjointAlignments:
 		"""
 		Return true iff b1 is complement base to b2
 		"""
+		if b1 == 'N' or b2 == 'N'  : return 1
 		if b1 == "A" and b2 == "U" : return 1
 		if b1 == "U" and b2 == "A" : return 1
 		if b1 == "C" and b2 == "G" : return 1

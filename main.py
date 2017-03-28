@@ -4,6 +4,9 @@ from disjoint_alignments import disjointAlignments as DA
 from r_fold import RNA_Fold as RF
 from residuals import residuals
 from functools import reduce
+from Bio import SeqIO
+from random import random
+from math import ceil
 
 
 """
@@ -17,72 +20,89 @@ STEPS:
 
 1) Call k-Optimal Local Alignment with specific k
 
-2) Perform any caretaking on leftover subsequences needed 
-to pass into RNA folding alg
+2) Call RNA Folding on leftover subsequences
 
-3) Call RNA Folding on leftover subsequences
-
-4) Append local alignment results and RNA folding results
-together. 
-
-5) Output in informative manner. 
+3) Compare scores between k-local-folding and typical 
+folding
 
 """
 
-seq = "UAUAUAUAUAGCAUGAGUGUCGCGCGCGC"
-k = 2
-sep = '*'*60 + '\n'
 
-print(sep)
-print(' '*12, 'RNA FOLDING USING LOCAL ALIGNMENT\n')
+def kLocalFold(seq,k, verbose=1):
+	"""
+	Carry out k-local-folding and typical rna folding on sequence and 
+	compare score. 
+	Print progress if verbose.
+	"""
+	sep = '*'*60 + '\n'
 
-# Find k optimal alignments between seq and itself
-align = DA(seq)
-align.kAlignments(k)
+	# Find k optimal alignments between seq and itself. Score 
+	# alignments. 
+	align = DA(seq)
+	align.kAlignments(k)
+	local_score = DA.scoreAlignments(align.alignments)
+	
+	# Pass leftover sequences into RNA folding. 
+	inds1 = list(map(lambda x: x[0], align.alignments))
+	inds2 = list(map(lambda x: x[1], align.alignments))
+	inds = inds1 + inds2
 
-print(sep)
-print('Step 1: K-OPTIMAL LOCAL ALIGNMENTS\n')
-align.printAlignments()
-local_score = DA.scoreAlignments(align.alignments)
-print('RNA FOLDING SCORE:', local_score)
-print(sep)
+	res = residuals(seq)
+	res.getResiduals(inds)
+	res_score = 0
+	for r in res.residuals:
+		rf = RF()
+		rf.fold(r[0])
+		res_score += rf.F[0][len(rf.F[0])-1]
 
-
-# Pass leftover sequences into RNA folding. 
-print('Step 2: PASS UNMATCHED SEQUENCES TO RNA FOLDER\n')
-inds1 = list(map(lambda x: x[0], align.alignments))
-inds2 = list(map(lambda x: x[1], align.alignments))
-inds = inds1 + inds2
-
-res = residuals(seq)
-res.getResiduals(inds)
-print('Residual subsequences:')
-print(res.residuals, '\n')
-
-res_score = 0
-for r in res.residuals:
+	# Score comparison
+	total_score = res_score + local_score
 	rf = RF()
-	rf.fold(r[0])
-	res_score += rf.F[0][len(rf.F[0])-1]
+	rf.fold(seq)
+	rna_score = rf.F[0][len(rf.F[0])-1]
 
-print('Score from RNA folding on residuals:', res_score)
-print(sep)
+	
+	if verbose:
+		print(sep)
+		print(' '*12, 'RNA FOLDING USING LOCAL ALIGNMENT\n')
+		print(sep)
+		print('Step 1: K-OPTIMAL LOCAL ALIGNMENTS\n')
+		align.printAlignments()
+		print('RNA FOLDING SCORE:', local_score)
+		print(sep)
+		print('Step 2: PASS UNMATCHED SEQUENCES TO RNA FOLDER\n')
+		print('Residual subsequences:')
+		print(res.residuals, '\n')
+		print('Score from RNA folding on residuals:', res_score)
+		print(sep)
+		print('STEP 3: COMPARE SCORES FROM BOTH METHODS\n')
+		
+	print('Score of this method:', total_score)
+	print('Score of typical RNA folding:', rna_score, '\n')
 
-# Score comparison
-print('STEP 3: COMPARE SCORES FROM BOTH METHODS\n')
-total_score = res_score + local_score
-rf = RF()
-rf.fold(seq)
-rna_score = rf.F[0][len(rf.F[0])-1]
-
-print('Score of this method:', total_score)
-print('Score of typical RNA folding', rna_score)
-
-
-
-
+def randomRNA(length):
+	"""
+	Generate Random RNA sequences drawn from uniform 
+	distribution
+	"""
+	alph = ['A','C','U','G']
+	seq = ""
+	for i in range(length):
+		r = int(ceil(4*random()))
+		seq += alph[r-1]
+	return seq
 
 
+
+def main():
+	fasta_seq = SeqIO.parse(open("rna.fasta"), "fasta")
+	for fasta in fasta_seq:
+		kLocalFold(fasta.seq[0:250],5,0)
+	#for i in range(10):
+	# 	kLocalFold(randomRNA(200), 5,0)
+
+
+main()
 
 
 
