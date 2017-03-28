@@ -7,7 +7,7 @@ from r_fold import RNA_Fold as RF
 
 
 """
-Main File for running BWT_RNA
+Main File for running local alignment RNA folding
 
 Written jointly by:
 Coulter Beeson, Ben Chugg, Kenny Drabble, Jeffrey Jeyachandren
