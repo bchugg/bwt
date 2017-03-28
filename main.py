@@ -34,8 +34,7 @@ k = 2
 sep = '*'*60 + '\n'
 
 # Find k optimal alignments between seq and itself
-rev = seq[::-1]
-align = DA(seq,rev)
+align = DA(seq)
 align.kAlignments(k)
 
 print(sep)
