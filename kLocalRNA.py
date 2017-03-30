@@ -24,11 +24,14 @@ folding
 """
 
 
-def kLocalFold(seq,k, verbose=1):
+def kLocalFold(seq,k, verbose=0):
 	"""
 	Carry out k-local-folding and typical rna folding on sequence and 
 	compare score. Return k-local score and score from typical RNA folding
-	Print progress if verbose.
+	Verbose: 
+	 - 0 for no output
+	 - 1 for printing only scores
+	 - 2 for obscenely verbose
 	"""
 	sep = '*'*60 + '\n'
 
@@ -58,7 +61,7 @@ def kLocalFold(seq,k, verbose=1):
 	rna_score = rf.F[0][len(rf.F[0])-1]
 
 	
-	if verbose:
+	if verbose == 2:
 		print(sep)
 		print(' '*12, 'RNA FOLDING USING LOCAL ALIGNMENT\n')
 		print(sep)
@@ -72,8 +75,9 @@ def kLocalFold(seq,k, verbose=1):
 		print('Score from RNA folding on residuals:', res_score)
 		print(sep)
 		print('STEP 3: COMPARE SCORES FROM BOTH METHODS\n')
-		
-	print('Score of this method:        ', total_score)
-	print('Score of typical RNA folding:', rna_score, '\n')
+	
+	if verbose >= 1:	
+		print('Score of this method:        ', total_score)
+		print('Score of typical RNA folding:', rna_score, '\n')
 
 	return[total_score, rna_score]

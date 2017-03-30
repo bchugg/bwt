@@ -59,6 +59,7 @@ class disjointAlignments:
 			print("Number of alignments found:",opt)
 			print("Resetting Optimal k to",opt, end=' ')
 			self.k = opt
+			self.alignments = self.alignments[0:self.k]
 			print("... ... DONE\n")
 
 		
@@ -99,6 +100,7 @@ class disjointAlignments:
 		"""
 		Score self-alignments based on RNA scoring model
 		"""
+		#print(alignments)
 		score = 0
 		for a in alignments:
 			s, x, y = 0, a[3][0], a[3][1]
