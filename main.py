@@ -67,9 +67,9 @@ def main():
 	Parameters:
 	"""
 	num_sequences = 10
-	krange = [1,2,3,4]
+	krange = [19,20,21,22,23,24,25]
 	title = 'k-Local Folding vs Standard Folding'
-	filename = 'test_compare'
+	filename = 'k1-10_20seqs'
 	params = ["Average Score", "k", title, filename]
 
 	fasta_seq = list(SeqIO.parse(open("rna.fasta"), "fasta"))

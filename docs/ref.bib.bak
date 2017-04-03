@@ -1,0 +1,102 @@
+@article{one, 
+	author="Christian Höner zu Siederdissena and Stephan H. Bernhart and Peter F. Stadler and Ivo L. Hofacker", 
+	title="A folding algorithm for extended RNA secondary structures",
+   	journal = "Bioinformatics", 
+    year = "2011", 
+    volume = "27", 
+    DOI = "10.1093/bioinformatics/btr220"}
+    
+@article{two, 
+	author="Zemora Georgeta and Christina Waldsich",
+    title={RNA Folding in Living Cells}, 	 journal="RNA Biology",
+    volume="7.6", 
+    year="2010",
+    pages="634–641"
+}
+
+@article{three, 
+	author="Sean R Eddy",
+    title={How do RNA folding algorithms work?},
+    journal="Nature Biotechnology",
+    volume="22",
+    pages="1457-1458",
+    year="2004"
+}
+
+@article{four,
+	author="T.W. Lam and W.K. Sung and S.L. Tam and C.K. Wong and S.M. Yiu",
+    title="Compressed indexing and local alignment of DNA",
+    journal="Bioinformatics",
+    volume="24:6",
+    pages="791-797",
+    year=2008
+}
+
+@article{five,
+	author="David H Mathews and Douglas H Turner",
+    title="Prediction of RNA secondary structure by free energy minimization",
+    journal="Current Opinion in Structural Biology",
+    volume="16:3",
+    pages="270-278",
+    year=2006
+}
+
+@article{six,
+	author="Giovanni Manzini",
+    title="An analysis of the Burrows-Wheeler Transform",
+    journal="Journal of the Association for Computing Machinery",
+    volume="48:3",
+    pages="407-430",
+    year=2001
+}
+
+@article{seven, 
+	author="Heng Li and Richard Durbin",
+    title="Fast and accurate long-read alignment with Burrows-Wheeler transform",
+    journal="Bioinformatics",
+    volume="36:5",
+    pages="589-595",
+    year=2010
+}
+
+@article{eight,
+	author="Jennifer A Doudna and Jon R Lorsch",
+    title="Ribozyme catalysis: not different, just worse",
+    journal="Nature Structural and Molecular Biology",
+    volume="12",
+    pages="395-402",
+    year=2005
+}
+
+@article{nine, 
+	author="Markus C Wahl and Cindy L Will and Reinhard Lurhmann",
+    title="The Spliceosome: Design Principles of a Dynamic RNP Machine",
+    journal="Cell",
+    volume="136:4",
+    pages="701-718",
+    year=2009
+}
+
+@article{ten,
+	author="Jamie H Cate and Anne R Gooding and Elaine Podell and Kaihong Zhou and et al",
+    title="Crystal structure of a group I ribozyme domain: Principles of RNA packing",
+    journal="Science",
+    volume="273:5282",
+    pages="1678-1685",
+    year=1996
+}
+
+@article{eleven,
+	author="M Zuker and D.H. Mathews and D.H. Turner",
+    title="Algorithms and Thermodynamics for RNA Secondary Structure Prediction: A Practical Guide",
+    journal={RNA Biochemistry and Biotechnology},
+    volume="70",
+    pages="11-43",
+    year=1999
+}
+
+@article{twelve,
+	author="Gultyaev and Alexander P, Olsthoorn and René CL. Pleij and Cornelis WA and Westhof",
+    title={RNA Structure: Pseudoknots},
+    journal="eLS John Wiley and Sons Ltd, Chichester."
+}
