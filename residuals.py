@@ -1,3 +1,4 @@
+import numpy as np
 from operator import itemgetter
 
 """
@@ -16,6 +17,7 @@ class residuals:
 		"""
 		Compute residual subsequences of x which do not appear
 		in any alignment, given list of indices of subsequences
+
 		"""
 		xrep = [ "free" for _ in range(len(self.x)) ]
 		#Mark xrep

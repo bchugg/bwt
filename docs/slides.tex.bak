@@ -12,9 +12,13 @@
 \titlepage
 \end{frame}
 
+
 \begin{frame}
-\frametitle{Background}
 \section*{Background}
-RNA is important!  
+\frametitle{RNA Folding}
+RNA consists of the four base pairs Adenine (\A), Guanine (\G) , Cytosine (\C) and Uracil (\U). These base pairs of RNA pair in a complementary fashion: Adenine to Uracil ($\A-\U$) and Cytosine to Guanine ($\C-\G$). 
+
+Unlike DNA, we are concerned with folding 
+
 \end{frame}
 \end{document}

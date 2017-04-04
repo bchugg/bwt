@@ -1,5 +1,5 @@
 
-alph = { 'A', 'C', 'G', 'U' }
+alph = { 'A', 'C', 'G', 'U', 'N'}
 
 class RNA_Fold():
   """
@@ -90,18 +90,13 @@ class RNA_Fold():
     Given characters x and y in alph, returns true is x is the complement of y
     """
     #TODO should this thrown an error? probably
-    if(x not in alph or y not in alph):
-      return False
-    if(x == 'A' and y == 'U'):
-      return True
-    elif(x == 'U' and y == 'A'):
-      return True
-    elif(x == 'G' and y == 'C'):
-      return True
-    elif(x == 'C' and y == 'G'):
-      return True
-    else:
-      return False
+    if(x not in alph or y not in alph): return False
+    if (x == 'N' or y == 'N'): return True
+    if(x == 'A' and y == 'U'): return True
+    if(x == 'U' and y == 'A'): return True
+    if(x == 'G' and y == 'C'): return True
+    if(x == 'C' and y == 'G'): return True
+    return False
 
   def print_F(self):
 

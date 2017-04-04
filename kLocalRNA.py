@@ -24,14 +24,20 @@ folding
 """
 
 
-def kLocalFold(seq,k, verbose=0):
+def kLocalFold(seq,k, params=[np.inf, 0,0]):
 	"""
 	Carry out k-local-folding and typical rna folding on sequence and 
 	compare score. Return k-local score and score from typical RNA folding
-	Verbose: 
-	 - 0 for no output
-	 - 1 for printing only scores
-	 - 2 for obscenely verbose
+	Restrict k-local alignments to have max_knots pseudoknots
+	Optional extra parameters: 
+	- params[0] = maximum number of pseudoknots allowed
+	- params[1] = 
+		- 1 if only want to perform k local folding, 
+		- perform typical rna folding as well otherwise
+	- params[2] = verbosity
+		- 0 for no output
+		- 1 for printing only scores
+		- 2 for obscene verbosity
 	"""
 	sep = '*'*60 + '\n'
 
@@ -39,6 +45,11 @@ def kLocalFold(seq,k, verbose=0):
 	# alignments. 
 	align = DA(seq)
 	align.kAlignments(k)
+	try:
+		if params[0] < np.inf: align.removePseudoknots(params[0])
+	except IndexError:
+		print('Not removing pseudoknots')
+
 	local_score = DA.scoreAlignments(align.alignments)
 	
 	# Pass leftover sequences into RNA folding. 
@@ -56,11 +67,20 @@ def kLocalFold(seq,k, verbose=0):
 
 	# Score comparison
 	total_score = res_score + local_score
-	rf = RF()
-	rf.fold(seq)
-	rna_score = rf.F[0][len(rf.F[0])-1]
-
+	rna_score = 0
+	try: 
+		if params[1] != 0:
+			rf = RF()
+			rf.fold(seq)
+			rna_score = rf.F[0][len(rf.F[0])-1]
+	except IndexError:
+		print("Performing regular RNA folding as comparison")
 	
+	try: 
+		verbose = params[2]
+	except IndexError:
+		verbose = 0
+
 	if verbose == 2:
 		print(sep)
 		print(' '*12, 'RNA FOLDING USING LOCAL ALIGNMENT\n')

@@ -24,6 +24,10 @@ res = residuals(x)
 res.getResiduals(inds)
 print(res.residuals)
 
+res = residuals(x)
+res.getResiduals(inds[::-1])
+print(res.residuals)
+
 
 """
 Test 2

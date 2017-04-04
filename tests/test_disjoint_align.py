@@ -53,6 +53,46 @@ Expected: 11
 print('Test 5')
 alignments = [[0,0,0,['CGAACGUUA', 'GCUUGCAAU']], [0,0,0,['AACG','UUCG']]]
 print(DA.scoreAlignments(alignments), 'Expected:', 11)
+print('\n')
+
+
+"""
+Test 6
+Removing Pseudoknots
+"""
+
+print('Test 6')
+align1 = [[3,6], [12,15], 20]
+align2 = [[6,8], [16,18], 10]
+kaligns = DA(seq)
+kaligns.alignments = [align1, align2]
+kaligns.k = 2
+kaligns.removePseudoknots(0)
+print(kaligns.alignments, 'k=', kaligns.k)
+
+"""
+Test 6
+Removing Pseudoknots
+"""
+
+print('Test 6')
+align1 = [[3,6], [12,15], 20]
+align2 = [[6,8], [16,18], 10]
+align3 = [[8,10], [18,19], 15]
+kaligns = DA(seq)
+kaligns.alignments = [align1, align2, align3]
+kaligns.k = 2
+kaligns.removePseudoknots(1)
+print(kaligns.alignments, 'k=', kaligns.k)
+
+
+
+
+
+
+
+
+
 
 
 

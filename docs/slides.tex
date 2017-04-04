@@ -1,6 +1,10 @@
 \documentclass{beamer}
 \usetheme{Berkeley}
 \usecolortheme{dove}
+\newcommand{\A}{\texttt{A}}
+\newcommand{\G}{\texttt{G}}
+\newcommand{\U}{\texttt{U}}
+\newcommand{\C}{\texttt{C}}
 
 \title{A Local Alignment Approach to RNA folding}
 \author{Ben Chugg, Coulter Beeson, Kenny Drabble, Jeff Jeyachandren}
@@ -12,9 +16,16 @@
 \titlepage
 \end{frame}
 
+
 \begin{frame}
-\frametitle{Background}
 \section*{Background}
-RNA is important!  
+\frametitle{RNA Folding}
+RNA consists of the four base pairs Adenine (\A), Guanine (\G) , Cytosine (\C) and Uracil (\U). These base pairs of RNA pair in a complementary fashion: Adenine to Uracil ($\A-\U$) and Cytosine to Guanine ($\C-\G$). \\
+
+Unlike DNA for which we are concerned with optimally aligning two strands, for RNA we are concerned with how the strand folds with itself. 
+
+\[\A\C\A\A\G\U\G\U\A\A\G\U\U\U\U\]
+\[|\;|\;|\;|\;|\;|\] 
+
 \end{frame}
 \end{document}
