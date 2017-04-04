@@ -69,7 +69,7 @@ def kLocalFold(seq,k, params=[np.inf, 0,0]):
 	total_score = res_score + local_score
 	rna_score = 0
 	try: 
-		if params[1] != 0:
+		if params[1] != 1:
 			rf = RF()
 			rf.fold(seq)
 			rna_score = rf.F[0][len(rf.F[0])-1]

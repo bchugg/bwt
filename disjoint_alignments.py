@@ -136,7 +136,7 @@ class disjointAlignments:
 			for i in range(np.min([len(x),len(y)])):
 				s += disjointAlignments.complement(x[i],y[i])
 			score += s
-		return score
+		return score/2
 
 
 	@staticmethod
