@@ -75,7 +75,8 @@ def main():
 
 	"""
 	#Parameters:
-	files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliate.fasta', 'vRna.fasta']
+	#files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliateRna.fasta', 'data/vRna.fasta']
+	files = ['data/vRna.fasta']
 	num_seqs = 20
 	k_ranges = [[0,1,2,3,4,5,6,7,8], [15,16,17,18,19,20]]
 	max_knots_range = [0,3,5,7]
