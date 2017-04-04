@@ -9,13 +9,13 @@ from functools import reduce
 
 
 """
-Main File calling and testing k-local RNA folding. 
+Main File calling and testing k-local RNA folding.
 
 """
 
 def randomRNA(length):
 	"""
-	Generate Random RNA sequences drawn from uniform 
+	Generate Random RNA sequences drawn from uniform
 	distribution
 	"""
 	alph = ['A','C','U','G']
@@ -27,8 +27,8 @@ def randomRNA(length):
 
 def testAndPlot(fasta_file, num_sequences, max_knots, krange, params):
 	"""
-	Run k-local folding on sequences with for all k in krange. 
-	Plot results using parameters in params 
+	Run k-local folding on sequences with for all k in krange.
+	Plot results using parameters in params
 	- params[0], ylabel
 	- params[1], xlabel
 	- params[2], title
@@ -75,8 +75,7 @@ def main():
 
 	"""
 	#Parameters:
-	#files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliateRna.fasta', 'data/vRna.fasta']
-	files = ['data/vRna.fasta']
+	files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliateRna.fasta', 'data/vRna.fasta']
 	num_seqs = 20
 	k_ranges = [[0,1,2,3,4,5,6,7,8], [15,16,17,18,19,20]]
 	max_knots_range = [0,3,5,7]
@@ -89,19 +88,10 @@ def main():
 				filename = f.split('data/')[1].split('.fasta')[0]
 				title = global_title+' with '+str(num_seqs)+' sequences'
 				saveas = 'k'+str(r[0])+'_-'+str(r[len(r)-1])+'_'+str(num_seqs)+'seqs_'
-				saveas += str(m)+'knots_250length_'+filename
+				saveas += str(m)+'knots_250length_'+filename+'_NEW_'
 				params = ["Average Score", "k", title, plot, saveas]
 				testAndPlot(f, num_seqs, m, r, params)
 
 
+
 main()
-
-
-
-
-
-
-	
-
-
-

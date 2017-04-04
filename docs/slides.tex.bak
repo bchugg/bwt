@@ -2,12 +2,14 @@
 \usetheme{Berkeley}
 %\usecolortheme{dove}
 \usepackage{graphicx}
+\usepackage{algpseudocode}
 \usepackage[font={footnotesize}]{caption}
 \newcommand{\A}{\texttt{A}}
 \newcommand{\G}{\texttt{G}}
 \newcommand{\U}{\texttt{U}}
 \newcommand{\C}{\texttt{C}}
-\newcommand{\klf}{\textsc{k-Local Folding}}
+\newcommand{\klf}{\textsc{k-Local Folding} }
+\newcommand{\rf}{\textsc{DP Folding} }
 
 \title{A Local Alignment Approach to RNA folding}
 \author{Ben Chugg, Coulter Beeson, Kenny Drabble, Jeff Jeyachandren}
@@ -69,6 +71,8 @@ A strand $r=r_1,\ldots,r_n$ is said to contain a pseudo knot if there exist indi
 \caption{Source: \url{http://www.sciencedirect.com/science/article/pii/S0025556413001788}}
 \end{figure}
 
+We will call this typical RNA folding algoritm \rf. 
+
 \end{frame}
 
 \begin{frame}
@@ -76,6 +80,13 @@ A strand $r=r_1,\ldots,r_n$ is said to contain a pseudo knot if there exist indi
 \section*{Our Approach}
 Idea: Subsequences of an RNA strand which are (near) palindromes of each other are likely to be a good match. \\
 
-Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and a parameter $k$, runs a local 
+Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and a parameter $k$, runs a local alignment algorithm on the strand to find $k$ high scoring --- and disjoint --- palindromic regions of $r$. It then passes the remaining unpaired regions to \rf to be folded as usual. 
+
+\begin{algorithmic}
+\Function{k-Local Folding}{$r,k$}
+\State Call Smith Waterman on $r$ $k$ times 
+\EndFunction
+\end{algorithmic}
+
 \end{frame}
 \end{document}
