@@ -9,13 +9,13 @@ from functools import reduce
 
 
 """
-Main File calling and testing k-local RNA folding. 
+Main File calling and testing k-local RNA folding.
 
 """
 
 def randomRNA(length):
 	"""
-	Generate Random RNA sequences drawn from uniform 
+	Generate Random RNA sequences drawn from uniform
 	distribution
 	"""
 	alph = ['A','C','U','G']
@@ -27,8 +27,8 @@ def randomRNA(length):
 
 def testAndPlot(sequences, krange, params):
 	"""
-	Run k-local folding on sequences with for all k in krange. 
-	Plot results using parameters in params 
+	Run k-local folding on sequences with for all k in krange.
+	Plot results using parameters in params
 	- params[0], ylabel
 	- params[1], xlabel
 	- params[2], title
@@ -72,22 +72,12 @@ def main():
 	filename = 'test_compare'
 	params = ["Average Score", "k", title, filename]
 
-	fasta_seq = list(SeqIO.parse(open("rna.fasta"), "fasta"))
+	fasta_seq = list(SeqIO.parse(open("ciliateRna.fasta"), "fasta"))
 	inds = np.floor(np.random.rand(num_sequences)*len(fasta_seq)).astype(int)
 	sequences = list(map(lambda x: x.seq[0:250],[fasta_seq[i] for i in inds]))
-	
-	
+
+
 	testAndPlot(sequences, krange, params)
 
 
 main()
-
-
-
-
-
-
-	
-
-
-

@@ -11,7 +11,7 @@ between an RNA sequence and itself
 """
 
 
-""" 
+"""
 Global Vars
 """
 # minimum score
@@ -23,9 +23,9 @@ sm = score_matrix
 class localAlignRNA:
 	"""
 	A class to solve local Alignment. Computes k-optimal disjoint
-	local alignments 
+	local alignments
 	"""
-	
+
 	def __init__(self, x, offset=0):
 		"""
 		x with length n, y with legth m are two sequences to compare
@@ -34,15 +34,15 @@ class localAlignRNA:
 		self.y = x[::-1]
 		self.n = len(x)+1
 		self.offset = offset
-		
+
 
 	def computeAlignment(self):
 		"""
 		Fill out alignment matrices for local alignment between
 		sequences x and y. Return alignment, indices, and score
 		"""
-		# Initialize 
-		n = self.n  
+		# Initialize
+		n = self.n
 		self.M = np.zeros((n,n))
 		for i in range(1, n):
 			b = self.findIndex(i-1,self.y)
@@ -54,7 +54,7 @@ class localAlignRNA:
 		self.traceback()
 
 	def findIndex(self, index, sequence):
-		""" 
+		"""
 		Find index in alphabet of sequence[index]
 		"""
 		letter = sequence[index]
@@ -62,12 +62,12 @@ class localAlignRNA:
 		# 	letter = 'C'
 		return alphabet.index(letter)
 
-	
-	
+
+
 	def traceback(self):
 		"""
 		Traceback procedure for computing alignment
-		
+
 		Returns [align, i, j, score]
 		align[0] is subsequence of x
 		align[1] is subsequence of y
@@ -91,7 +91,7 @@ class localAlignRNA:
 
 	def assemble(self, align, xind, yind, score):
 		"""
-		Map alignments back onto original sequence x. Return alignment 
+		Map alignments back onto original sequence x. Return alignment
 		and index info
 		"""
 		lrx = yind
@@ -101,14 +101,14 @@ class localAlignRNA:
 		self.align_info = [m1_ind, m2_ind, score, align]
 
 	def emptyAlign(self):
-		""" 
+		"""
 		Return true if empty alignment
 		"""
 		m1_length = self.align_info[0][0] - self.align_info[0][1]
 		m2_length = self.align_info[1][0] - self.align_info[1][1]
 		return (m1_length == 0 or m2_length == 0)
 
-	
+
 	@staticmethod
 	def printAlignment(alignment):
 		"""
@@ -121,7 +121,3 @@ class localAlignRNA:
 		print(alignment[3][0][0:60])
 		print(alignment[3][1][0:60])
 		print('\n')
-
-
-
-
