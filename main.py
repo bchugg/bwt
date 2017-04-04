@@ -25,15 +25,12 @@ def randomRNA(length):
 		seq += alph[r-1]
 	return seq
 
-def testAndPlot(fasta_file, num_sequences, max_knots, krange, params):
+def testAndPlot(fasta_file, num_sequences, krange, params):
 	"""
 	Run k-local folding on sequences with for all k in krange.
 	Plot results using parameters in params
-	- params[0], ylabel
-	- params[1], xlabel
-	- params[2], title
-	- params[3], 1 if figure is to be plotted
-	- params[4], filename (optional)
+	- params[0], 1 if figure is to be plotted
+	- params[1], filename (optional)
 
 	"""
 
@@ -43,28 +40,56 @@ def testAndPlot(fasta_file, num_sequences, max_knots, krange, params):
 		
 	n = len(sequences)
 	averages = []
-	rna_fold_average = 0
+	times = []
+	results = [0,0,0,0]
 	for k in krange:
-		k_fold_average = 0
-		p = 1 if k == krange[0] else 0 
+		p = 1 if k == krange[0] else 0
+		results[0], results[1] = 0,0
 		for seq in sequences:
-			scores = kLocalFold(seq,k,[max_knots,p,0])
-			k_fold_average += scores[0]
-			if p == 1 : rna_fold_average += scores[1]
-		averages += [[k_fold_average/n, rna_fold_average/n]]
+			fold_results = kLocalFold(seq,k,p,0)
+			results[0] += fold_results[0]
+			results[1] += fold_results[1]
+			if p == 1 : 
+				results[2] += fold_results[2]
+				results[3] += fold_results[3]
 
+		averages += [[results[0]/n, results[2]/n]]
+		times += [[results[1]/n, results[3]/n]]
+
+	title = 'TIME_k'+str(krange[0])+'-'+str(krange[len(krange)-1])
+	title += '_'+str(n)+'seqs_'+params[1]
 	k_local_ave = list(map(lambda x: x[0], averages))
 	rna_ave = list(map(lambda x: x[1], averages))
+	plot_scores(krange, k_local_ave,rna_ave, title, params)
+	time_ratio = list(map(lambda x: x[0]/float(x[1]), times))
+	plot_times(krange, time_ratio, title, params)
+
+def plot_scores(krange, k_local_ave, rna_ave, title, params):
 	plt.plot(krange, k_local_ave, 'go', label = 'k-Local Folding')
-	plt.plot(krange, rna_ave, 'b--', label ='Standard Folding')
-	plt.ylabel(params[0])
-	plt.xlabel(params[1])
-	plt.title(params[2])
+	plt.plot(krange, rna_ave, 'b--', label = 'Standard Folding')
+	plt.ylabel('Average Scores')
+	plt.xlabel('k')
+	plt.title('Scores of k-Local Folding vs Nussinov')
 	plt.legend()
-	if len(params) > 4:
-		path = 'figures/' + params[4]
+	if len(params)>1:
+		name = 'SCORE_' + title
+		path = 'figures/' + name
 		plt.savefig(path)
-	if params[3] == 1:
+	if params[0]:
+		plt.show()
+	plt.clf()
+	
+
+def plot_times(krange, time_ratio, title, params):
+	plt.plot(krange, time_ratio)
+	plt.ylabel('Time Ratio: k-Local to Nussinov')
+	plt.xlabel('k')
+	plt.title('Time Comparison of k-Local Folding to Nussinov')
+	if len(params)>1:
+		name = 'TIME_' + title
+		path = 'figures/' + name
+		plt.savefig(path)
+	if params[0]:
 		plt.show()
 	plt.clf()
 		
@@ -77,20 +102,18 @@ def main():
 	#Parameters:
 	files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliateRna.fasta', 'data/vRna.fasta']
 	num_seqs = 20
-	k_ranges = [[0,1,2,3,4,5,6,7,8], [15,16,17,18,19,20]]
-	max_knots_range = [0,3,5,7]
-	global_title = 'k-Local Folding vs Standard Folding'
+	k_ranges = [[0,1,2,3,4,5,6,7,8], [15,16,17,18,19]]
 	plot = 0 # Change to 1 to have results plotted each iteration
+	save = 1
 	
 	for f in files:
 		for r in k_ranges:
-			for m in max_knots_range:
-				filename = f.split('data/')[1].split('.fasta')[0]
-				title = global_title+' with '+str(num_seqs)+' sequences'
-				saveas = 'k'+str(r[0])+'_-'+str(r[len(r)-1])+'_'+str(num_seqs)+'seqs_'
-				saveas += str(m)+'knots_250length_'+filename+'_NEW_'
-				params = ["Average Score", "k", title, plot, saveas]
-				testAndPlot(f, num_seqs, m, r, params)
+			filename = f.split('data/')[1].split('.fasta')[0]
+			if save == 1:
+				params = [plot,filename]
+			else: 
+				params = [plot]
+			testAndPlot(f, num_seqs, r, params)
 
 
 

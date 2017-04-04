@@ -4,6 +4,7 @@ from disjoint_alignments import disjointAlignments as DA
 from r_fold import RNA_Fold as RF
 from residuals import residuals
 from functools import reduce
+import time
 
 """
 Main File for running local alignment RNA folding
@@ -24,17 +25,16 @@ folding
 """
 
 
-def kLocalFold(seq,k, params=[np.inf, 0,0]):
+def kLocalFold(seq,k, rna_fold=1, verbose=1):
 	"""
 	Carry out k-local-folding and typical rna folding on sequence and 
 	compare score. Return k-local score and score from typical RNA folding
 	Restrict k-local alignments to have max_knots pseudoknots
 	Optional extra parameters: 
-	- params[0] = maximum number of pseudoknots allowed
-	- params[1] = 
-		- 1 if only want to perform k local folding, 
-		- perform typical rna folding as well otherwise
-	- params[2] = verbosity
+	- rna_fold:
+		- 1 to do regular rna folding as well
+		- 0 to do only k-local folding
+	- Verbosity:
 		- 0 for no output
 		- 1 for printing only scores
 		- 2 for obscene verbosity
@@ -44,14 +44,10 @@ def kLocalFold(seq,k, params=[np.inf, 0,0]):
 	# Find k optimal alignments between seq and itself. Score 
 	# alignments. 
 	align = DA(seq)
-	align.kAlignments(k)
-	try:
-		if params[0] < np.inf: align.removePseudoknots(params[0])
-	except IndexError:
-		print('Not removing pseudoknots')
 
+	start_klocal = time.time()
+	align.kAlignments(k)
 	local_score = DA.scoreAlignments(align.alignments)
-	
 	# Pass leftover sequences into RNA folding. 
 	inds1 = list(map(lambda x: x[0], align.alignments))
 	inds2 = list(map(lambda x: x[1], align.alignments))
@@ -64,22 +60,20 @@ def kLocalFold(seq,k, params=[np.inf, 0,0]):
 		rf = RF()
 		rf.fold(r[0])
 		res_score += rf.F[0][len(rf.F[0])-1]
+	end_klocal = time.time()
 
 	# Score comparison
 	total_score = res_score + local_score
 	rna_score = 0
-	try: 
-		if params[1] != 1:
-			rf = RF()
-			rf.fold(seq)
-			rna_score = rf.F[0][len(rf.F[0])-1]
-	except IndexError:
-		print("Performing regular RNA folding as comparison")
-	
-	try: 
-		verbose = params[2]
-	except IndexError:
-		verbose = 0
+
+	if rna_fold == 1:
+		start_rna = time.time()
+		rf = RF()
+		rf.fold(seq)
+		rna_score = rf.F[0][len(rf.F[0])-1]
+		end_rna = time.time()
+	else:
+		start_rna, end_rna, rna_score = 0,0,0
 
 	if verbose == 2:
 		print(sep)
@@ -100,4 +94,4 @@ def kLocalFold(seq,k, params=[np.inf, 0,0]):
 		print('Score of this method:        ', total_score)
 		print('Score of typical RNA folding:', rna_score, '\n')
 
-	return[total_score, rna_score]
+	return[total_score, end_klocal-start_klocal, rna_score, end_rna-start_rna]
