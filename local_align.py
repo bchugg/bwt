@@ -57,13 +57,12 @@ class localAlignRNA:
 		"""
 		Find index in alphabet of sequence[index]
 		"""
-		letter = sequence[index]
-		# if letter == 'U':
-		# 	letter = 'C'
-		return alphabet.index(letter)
-
-
-
+		try:
+			return alphabet.index(sequence[index])
+		except ValueError:
+			return alphabet.index('N')
+	
+	
 	def traceback(self):
 		"""
 		Traceback procedure for computing alignment

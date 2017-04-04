@@ -4,6 +4,7 @@ from params import score_matrix, alphabet
 from queue import Queue
 from local_align import localAlignRNA
 from functools import reduce
+from operator import itemgetter
 
 
 """
@@ -92,7 +93,35 @@ class disjointAlignments:
 		that alignment. Otherwise print all. 
 		"""
 		for i in range(self.k):
-				localAlignRNA.printAlignment(self.alignments[i])
+			localAlignRNA.printAlignment(self.alignments[i])
+
+
+	def removePseudoknots(self,max_knots):
+		"""
+		Return subset of alignments which form at most
+		max_knots pseudoknots. Alignments are kept in order
+		of highest score
+		"""
+		aligns = sorted(self.alignments,key=itemgetter(2), reverse=True)
+		new_aligns = []
+		xrep = [ "free" for _ in range(len(self.x)) ]
+		knots = 0
+		i = 0
+		for i in range(self.k):
+			align = aligns[i]
+			ind1 = align[0]
+			ind2 = align[1]
+			if (xrep[ind1[0]]=="free" and xrep[ind2[0]]=="free") or knots < max_knots:
+				if xrep[ind1[0]]!="free" or xrep[ind2[0]] != "free":
+					knots += 1
+				new_aligns += [align]
+				if ind1[0] > ind2[1]:
+					ind1[0], ind2[1] = ind2[1], ind1[0]
+				for j in range(ind1[0],ind2[1]):
+					xrep[j] = "!"
+		
+		self.alignments = new_aligns
+		self.k = len(new_aligns) 
 
 
 	@staticmethod
@@ -107,7 +136,7 @@ class disjointAlignments:
 			for i in range(np.min([len(x),len(y)])):
 				s += disjointAlignments.complement(x[i],y[i])
 			score += s
-		return score
+		return score/2
 
 
 	@staticmethod
