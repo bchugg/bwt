@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 APR 2017 10:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 APR 2017 11:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -983,10 +983,10 @@ Overfull \hbox (1.67201pt too wide) detected at line 63
 File: images/k_local_sequence.png Graphic file (type png)
 
 <use images/k_local_sequence.png>
-Package pdftex.def Info: images/k_local_sequence.png used on input line 107.
+Package pdftex.def Info: images/k_local_sequence.png used on input line 109.
 (pdftex.def)             Requested size: 219.2175pt x 137.71355pt.
 
-Overfull \vbox (12.15372pt too high) detected at line 107
+Overfull \vbox (12.15372pt too high) detected at line 109
  []
 
 [8
@@ -997,105 +997,107 @@ Overfull \vbox (12.15372pt too high) detected at line 107
 
 ] [11
 
+] [12
+
 ]
-<../figures/TIME_k0-10_20seqs_rna.png, id=449, 462.528pt x 346.896pt>
+<../figures/TIME_k0-10_20seqs_rna.png, id=484, 462.528pt x 346.896pt>
 File: ../figures/TIME_k0-10_20seqs_rna.png Graphic file (type png)
 
 <use ../figures/TIME_k0-10_20seqs_rna.png>
 Package pdftex.def Info: ../figures/TIME_k0-10_20seqs_rna.png used on input lin
-e 147.
+e 162.
 (pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
 
-<../figures/TIME_k14-20_20seqs_rna.png, id=450, 462.528pt x 346.896pt>
+<../figures/TIME_k14-20_20seqs_rna.png, id=485, 462.528pt x 346.896pt>
 File: ../figures/TIME_k14-20_20seqs_rna.png Graphic file (type png)
 
 <use ../figures/TIME_k14-20_20seqs_rna.png>
 Package pdftex.def Info: ../figures/TIME_k14-20_20seqs_rna.png used on input li
-ne 147.
+ne 162.
 (pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
 
-Overfull \hbox (5.28133pt too wide) in paragraph at lines 147--147
- [][] 
- []
-
-[12
-
- <../figures/TIME_k0-10_20seqs_rna.png> <../figures/TIME_k14-20_20seqs_rna.png>
-]
-<../figures/TIME_k0-10_20seqs_ciliateRna.png, id=490, 462.528pt x 346.896pt>
-File: ../figures/TIME_k0-10_20seqs_ciliateRna.png Graphic file (type png)
-
-<use ../figures/TIME_k0-10_20seqs_ciliateRna.png>
-Package pdftex.def Info: ../figures/TIME_k0-10_20seqs_ciliateRna.png used on in
-put line 156.
-(pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
-
-<../figures/TIME_k14-20_20seqs_ciliateRna.png, id=491, 462.528pt x 346.896pt>
-File: ../figures/TIME_k14-20_20seqs_ciliateRna.png Graphic file (type png)
-
-<use ../figures/TIME_k14-20_20seqs_ciliateRna.png>
-Package pdftex.def Info: ../figures/TIME_k14-20_20seqs_ciliateRna.png used on i
-nput line 156.
-(pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
-
-Overfull \hbox (5.28133pt too wide) in paragraph at lines 156--156
+Overfull \hbox (5.28133pt too wide) in paragraph at lines 162--162
  [][] 
  []
 
 [13
 
- <../figures/TIME_k0-10_20seqs_ciliateRna.png> <../figures/TIME_k14-20_20seqs_c
-iliateRna.png>]
-<../figures/SCORE_k0-10_20seqs_rna.png, id=528, 462.528pt x 346.896pt>
-File: ../figures/SCORE_k0-10_20seqs_rna.png Graphic file (type png)
+ <../figures/TIME_k0-10_20seqs_rna.png> <../figures/TIME_k14-20_20seqs_rna.png>
+]
+<../figures/TIME_k0-10_20seqs_ciliateRna.png, id=525, 462.528pt x 346.896pt>
+File: ../figures/TIME_k0-10_20seqs_ciliateRna.png Graphic file (type png)
 
-<use ../figures/SCORE_k0-10_20seqs_rna.png>
-Package pdftex.def Info: ../figures/SCORE_k0-10_20seqs_rna.png used on input li
-ne 168.
+<use ../figures/TIME_k0-10_20seqs_ciliateRna.png>
+Package pdftex.def Info: ../figures/TIME_k0-10_20seqs_ciliateRna.png used on in
+put line 171.
 (pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
 
-<../figures/SCORE_k14-20_20seqs_rna.png, id=529, 462.528pt x 346.896pt>
-File: ../figures/SCORE_k14-20_20seqs_rna.png Graphic file (type png)
+<../figures/TIME_k14-20_20seqs_ciliateRna.png, id=526, 462.528pt x 346.896pt>
+File: ../figures/TIME_k14-20_20seqs_ciliateRna.png Graphic file (type png)
 
-<use ../figures/SCORE_k14-20_20seqs_rna.png>
-Package pdftex.def Info: ../figures/SCORE_k14-20_20seqs_rna.png used on input l
-ine 168.
+<use ../figures/TIME_k14-20_20seqs_ciliateRna.png>
+Package pdftex.def Info: ../figures/TIME_k14-20_20seqs_ciliateRna.png used on i
+nput line 171.
 (pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
 
-Overfull \hbox (5.28133pt too wide) in paragraph at lines 168--168
+Overfull \hbox (5.28133pt too wide) in paragraph at lines 171--171
  [][] 
  []
 
 [14
 
- <../figures/SCORE_k0-10_20seqs_rna.png> <../figures/SCORE_k14-20_20seqs_rna.pn
-g>]
-<../figures/SCORE_k0-10_20seqs_ciliateRna.png, id=566, 462.528pt x 346.896pt>
-File: ../figures/SCORE_k0-10_20seqs_ciliateRna.png Graphic file (type png)
+ <../figures/TIME_k0-10_20seqs_ciliateRna.png> <../figures/TIME_k14-20_20seqs_c
+iliateRna.png>]
+<../figures/SCORE_k0-10_20seqs_rna.png, id=562, 462.528pt x 346.896pt>
+File: ../figures/SCORE_k0-10_20seqs_rna.png Graphic file (type png)
 
-<use ../figures/SCORE_k0-10_20seqs_ciliateRna.png>
-Package pdftex.def Info: ../figures/SCORE_k0-10_20seqs_ciliateRna.png used on i
-nput line 178.
+<use ../figures/SCORE_k0-10_20seqs_rna.png>
+Package pdftex.def Info: ../figures/SCORE_k0-10_20seqs_rna.png used on input li
+ne 183.
 (pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
 
-<../figures/SCORE_k14-20_20seqs_ciliateRna.png, id=567, 462.528pt x 346.896pt>
-File: ../figures/SCORE_k14-20_20seqs_ciliateRna.png Graphic file (type png)
+<../figures/SCORE_k14-20_20seqs_rna.png, id=563, 462.528pt x 346.896pt>
+File: ../figures/SCORE_k14-20_20seqs_rna.png Graphic file (type png)
 
-<use ../figures/SCORE_k14-20_20seqs_ciliateRna.png>
-Package pdftex.def Info: ../figures/SCORE_k14-20_20seqs_ciliateRna.png used on 
-input line 178.
+<use ../figures/SCORE_k14-20_20seqs_rna.png>
+Package pdftex.def Info: ../figures/SCORE_k14-20_20seqs_rna.png used on input l
+ine 183.
 (pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
 
-Overfull \hbox (5.28133pt too wide) in paragraph at lines 178--178
+Overfull \hbox (5.28133pt too wide) in paragraph at lines 183--183
  [][] 
  []
 
 [15
 
- <../figures/SCORE_k0-10_20seqs_ciliateRna.png> <../figures/SCORE_k14-20_20seqs
-_ciliateRna.png>] [16
+ <../figures/SCORE_k0-10_20seqs_rna.png> <../figures/SCORE_k14-20_20seqs_rna.pn
+g>]
+<../figures/SCORE_k0-10_20seqs_ciliateRna.png, id=601, 462.528pt x 346.896pt>
+File: ../figures/SCORE_k0-10_20seqs_ciliateRna.png Graphic file (type png)
 
-] [17
+<use ../figures/SCORE_k0-10_20seqs_ciliateRna.png>
+Package pdftex.def Info: ../figures/SCORE_k0-10_20seqs_ciliateRna.png used on i
+nput line 193.
+(pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
+
+<../figures/SCORE_k14-20_20seqs_ciliateRna.png, id=602, 462.528pt x 346.896pt>
+File: ../figures/SCORE_k14-20_20seqs_ciliateRna.png Graphic file (type png)
+
+<use ../figures/SCORE_k14-20_20seqs_ciliateRna.png>
+Package pdftex.def Info: ../figures/SCORE_k14-20_20seqs_ciliateRna.png used on 
+input line 193.
+(pdftex.def)             Requested size: 148.01198pt x 111.00897pt.
+
+Overfull \hbox (5.28133pt too wide) in paragraph at lines 193--193
+ [][] 
+ []
+
+[16
+
+ <../figures/SCORE_k0-10_20seqs_ciliateRna.png> <../figures/SCORE_k14-20_20seqs
+_ciliateRna.png>] [17
+
+] [18
 
 ]
 \tf@nav=\write6
@@ -1107,25 +1109,25 @@ _ciliateRna.png>] [16
 \tf@snm=\write8
 \openout8 = `slides.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 203.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 203.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 218.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 218.
  (./slides.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 203.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 203.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 218.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 218.
 Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: D27C7BE640AF8F92164266882D9A94EC;358.
+(rerunfilecheck)             Checksum: C45111666BB5F55F2E44BF1D511F9C29;358.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 203.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 218.
  ) 
 Here is how much of TeX's memory you used:
- 18549 strings out of 493089
- 355026 string characters out of 6134842
+ 18553 strings out of 493089
+ 355061 string characters out of 6134842
  423535 words of memory out of 5000000
- 21544 multiletter control sequences out of 15000+600000
+ 21546 multiletter control sequences out of 15000+600000
  18137 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,15n,60p,405b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1150,10 +1152,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2015/texmf-
 dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2015/te
 xmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on slides.pdf (17 pages, 508727 bytes).
+Output written on slides.pdf (18 pages, 513814 bytes).
 PDF statistics:
- 750 PDF objects out of 1000 (max. 8388607)
- 678 compressed objects within 7 object streams
- 43 named destinations out of 1000 (max. 500000)
+ 785 PDF objects out of 1000 (max. 8388607)
+ 711 compressed objects within 8 object streams
+ 45 named destinations out of 1000 (max. 500000)
  149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

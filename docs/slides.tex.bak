@@ -1,6 +1,6 @@
 \documentclass{beamer}
 \usetheme{Hannover}
-%\usecolortheme{dove}
+\usefonttheme{serif}
 \usepackage{graphicx}
 \usepackage{algpseudocode}
 \usepackage{subfig}
@@ -15,7 +15,8 @@
 \newcommand{\al}{\mathscr{A}}
 \renewcommand{\qedsymbol}{$\blacktriangleleft$}
 
-\title{A Local Alignment Approach to RNA folding}
+\title{\klf}
+\subtitle{A Local Alignment Approach to RNA folding}
 \author{Ben Chugg, Coulter Beeson, Kenny Drabble, Jeff Jeyachandren}
 \institute{\textsc{The University of British Columbia}}
 \date{April 6,2017}
@@ -72,6 +73,8 @@ Idea: Subsequences of an RNA strand which are (near) palindromes of each other a
 
 \begin{frame}
 \frametitle{\klf}
+\textbf{Formal Goal:} We propose a heuristic based approach to speed up Nussinov with a fast preprocessing step. \s
+
 Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and a parameter $k$, runs a local alignment algorithm on the strand to find $k$ high scoring --- and disjoint --- palindromic regions of $r$. It then passes the remaining unpaired regions to \rf to be folded as usual.
 \end{frame}
 
@@ -110,17 +113,17 @@ Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and
 \frametitle{\klf: Runtime Analysis}
 Fix an RNA strand $r$ with length $n$. 
 \begin{lemma}[1]
-Let $\al$ be the set of local alignments found. Finding $k$ disjoint local alignments of $r$ takes time $O(n^2\log k)$. 
+Let $\al$ be the set of local alignments found. Finding $k$ disjoint local alignments of $r$ takes time $O(n^2 k)$. 
 \end{lemma}
 \begin{lemma}[2]
 \klf runs in time
-\[O\left(\left(n-\sum_{A\in\al}\ell_A\right)^3+n^2\log k\right),\] where $\ell_A$ is the length of an alignment $A\in\al$. 
+\[O\left(\left(n-\sum_{A\in\al}\ell_A\right)^3+n^2k\right),\] where $\ell_A$ is the length of an alignment $A\in\al$. 
 \end{lemma}
 \end{frame}
 
 \begin{frame}
 \begin{proof}[Proof of Lemma 1]
-We can view the progress of the algorithm as a ternary tree: amortized across each level we perform local alignment on a sequence of size $n-\sum_{A\in\al}\ell_A$. Local alignment takes time squared in the size of the input. Since the tree has depth $\log(k)$, the result follows. 
+We can view the progress of the algorithm as a ternary tree: amortized across each level we perform local alignment on a sequence of size $n-\sum_{A\in\al}\ell_A$. Local alignment takes time squared in the size of the input. Since the tree in the worst case has depth $k$, the result follows. 
 \end{proof}
 \begin{proof}[Proof of Lemma 2]
 Running \rf takes cubic time in the size of the input. \klf first finds $k$ disjoint alignments, then runs \rf on the remaining unmatched regions, which have total length $n-\sum_{A\in\al}\ell_A$.   The result follows by applying lemma 1. 
@@ -128,16 +131,29 @@ Running \rf takes cubic time in the size of the input. \klf first finds $k$ disj
 \end{frame}
 
 \begin{frame}
+\frametitle{How big is the tree?}
+\begin{block}{remark}
+It's a very unlikely case that the depth of the tree is $k$: it will more likely be $\log(k)$. Therefore, an average case analysis will yield that \klf runs in time 
+\[O\left(\left(n-\sum_{A\in\al}\ell_A\right)^3+n^2\log (k)\right).\]
+\end{block}
+\end{frame}
+
+\begin{frame}
 \frametitle{$k$-Local Folding: Runtime Analysis}
 We remark that since $\sum_{A\in\ell_A}\ell_A^3\in O(n^3)$, $O((n-\sum_{A\in\al}\ell_A)^3)=O(n^3)$ so there is no asymptotic difference between \klf and \rf.
 However, our hypothesis was that there may a difference in the run times in practice.  
+
+\begin{block}{example}
+In the extreme case, suppose $r$ is a perfect palindrome. Then we do $O(n^2)$ work instead of $O(n^3)$, so we gain a factor of $n$. 
+\end{block}
 \end{frame}
 
 \begin{frame}
 \section{Results}
 \subsection{Runtimes}
 \frametitle{Results: Runtimes} 
-<Kind of Data - Kenny?>
+Each trial was run with 20 random sequences, and the results were taken as the average of the results. 
+The following data is for 16S Ribosomal Subunit RNA. 
 \begin{figure}
 \centering
 \subfloat[$k\in\{0,1,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/TIME_k0-10_20seqs_rna.png}}
@@ -147,7 +163,7 @@ However, our hypothesis was that there may a difference in the run times in prac
 
 \begin{frame}
 \frametitle{Results: Runtimes}
-Ciliate RNA data.
+Ciliate Telomerase RNA data.
 \begin{figure}
 \subfloat[$k\in\{0,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/TIME_k0-10_20seqs_ciliateRna.png}}
 \subfloat[$k\in\{14,\ldots,20\}$]{\includegraphics[scale=0.32]{../figures/TIME_k14-20_20seqs_ciliateRna.png}}
@@ -158,7 +174,7 @@ Ciliate RNA data.
 \begin{frame}
 \subsection{Scores}
 \frametitle{Results: Scores}
-<Type of Data>
+16s Ribosomal Subunit RNA
 \begin{figure}
 \centering
 \subfloat[$k\in\{0,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k0-10_20seqs_rna.png}}
@@ -169,7 +185,7 @@ Ciliate RNA data.
 
 \begin{frame}
 \frametitle{Results: Runtimes}
-Ciliate RNA data.
+Ciliate Telomerase RNA data.
 \begin{figure}
 \subfloat[$k\in\{0,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k0-10_20seqs_ciliateRna.png}}
 \subfloat[$k\in\{14,\ldots,20\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k14-20_20seqs_ciliateRna.png}}
@@ -191,7 +207,7 @@ Ciliate RNA data.
 \section{Extensions}
 \frametitle{Extensions and Further Research}
 \begin{enumerate}
-\item Can we speed up klf by being smarter with our data structures? Tempting to only do local alignment once ... 
+\item Can we speed up \klf by being smarter with our data structures? Tempting to only do local alignment once ... 
 \item Modify \klf to report possible pseudoknots 
 \item Compare \klf to the Four Russians method of speeding up Nussinov.
 \item  Probabilistic (Viterbi-like) Approach
