@@ -44,6 +44,7 @@ def kLocalFold(seq,k, rna_fold=1, verbose=1):
 	# Find k optimal alignments between seq and itself. Score 
 	# alignments. 
 	align = DA(seq)
+	res = residuals(seq)
 
 	start_klocal = time.time()
 	align.kAlignments(k)
@@ -53,17 +54,17 @@ def kLocalFold(seq,k, rna_fold=1, verbose=1):
 	inds2 = list(map(lambda x: x[1], align.alignments))
 	inds = inds1 + inds2
 
-	res = residuals(seq)
 	res.getResiduals(inds)
 	res_score = 0
 	for r in res.residuals:
 		rf = RF()
 		rf.fold(r[0])
 		res_score += rf.F[0][len(rf.F[0])-1]
+
+	total_score = res_score + local_score
 	end_klocal = time.time()
 
 	# Score comparison
-	total_score = res_score + local_score
 	rna_score = 0
 
 	if rna_fold == 1:
@@ -94,4 +95,4 @@ def kLocalFold(seq,k, rna_fold=1, verbose=1):
 		print('Score of this method:        ', total_score)
 		print('Score of typical RNA folding:', rna_score, '\n')
 
-	return[total_score, end_klocal-start_klocal, rna_score, end_rna-start_rna]
+	return [total_score, end_klocal-start_klocal, rna_score, end_rna-start_rna]

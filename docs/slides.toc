@@ -1,1 +1,5 @@
 \beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {2}{Our Approach}{5}{0}{1}
+\beamer@subsectionintoc {2}{1}{Runtime Analysis}{9}{0}{1}
+\beamer@sectionintoc {3}{Results}{12}{0}{2}
+\beamer@sectionintoc {4}{Conclusion}{13}{0}{3}

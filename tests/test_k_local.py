@@ -3,4 +3,4 @@ sys.path.append('../')
 from kLocalRNA import kLocalFold
 
 seq = "AAAAAAAACCCCCCCCCCCCGGGGGGGGGGGGUUUUUUUU"
-print(kLocalFold(seq,2))
+print(kLocalFold(seq,0))

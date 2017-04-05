@@ -55,16 +55,16 @@ def testAndPlot(fasta_file, num_sequences, krange, params):
 
 		averages += [[results[0]/n, results[2]/n]]
 		times += [[results[1]/n, results[3]/n]]
-
-	title = 'TIME_k'+str(krange[0])+'-'+str(krange[len(krange)-1])
-	title += '_'+str(n)+'seqs_'+params[1]
+	
+	name = 'k'+str(krange[0])+'-'+str(krange[len(krange)-1])
+	if len(params)>1 : name += '_'+str(n)+'seqs_'+params[1]
 	k_local_ave = list(map(lambda x: x[0], averages))
 	rna_ave = list(map(lambda x: x[1], averages))
-	plot_scores(krange, k_local_ave,rna_ave, title, params)
+	plot_scores(krange, k_local_ave,rna_ave, params)
 	time_ratio = list(map(lambda x: x[0]/float(x[1]), times))
 	plot_times(krange, time_ratio, title, params)
 
-def plot_scores(krange, k_local_ave, rna_ave, title, params):
+def plot_scores(krange, k_local_ave, rna_ave, name, params):
 	plt.plot(krange, k_local_ave, 'go', label = 'k-Local Folding')
 	plt.plot(krange, rna_ave, 'b--', label = 'Standard Folding')
 	plt.ylabel('Average Scores')
@@ -72,22 +72,20 @@ def plot_scores(krange, k_local_ave, rna_ave, title, params):
 	plt.title('Scores of k-Local Folding vs Nussinov')
 	plt.legend()
 	if len(params)>1:
-		name = 'SCORE_' + title
-		path = 'figures/' + name
+		path = 'figures/' + 'SCORE_' + name
 		plt.savefig(path)
 	if params[0]:
 		plt.show()
 	plt.clf()
 	
 
-def plot_times(krange, time_ratio, title, params):
-	plt.plot(krange, time_ratio)
+def plot_times(krange, time_ratio, name, params):
+	plt.plot(krange, time_ratio, 'o')
 	plt.ylabel('Time Ratio: k-Local to Nussinov')
 	plt.xlabel('k')
 	plt.title('Time Comparison of k-Local Folding to Nussinov')
 	if len(params)>1:
-		name = 'TIME_' + title
-		path = 'figures/' + name
+		path = 'figures/' + 'TIME_' + name
 		plt.savefig(path)
 	if params[0]:
 		plt.show()
@@ -100,11 +98,12 @@ def main():
 
 	"""
 	#Parameters:
-	files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliateRna.fasta', 'data/vRna.fasta']
+	files = ["data/rna.fasta", 'data/5sRNA.fasta', 'data/ciliateRna.fasta']
+	#files = ["data/rna.fasta"]
 	num_seqs = 20
-	k_ranges = [[0,1,2,3,4,5,6,7,8], [15,16,17,18,19]]
-	plot = 0 # Change to 1 to have results plotted each iteration
-	save = 1
+	k_ranges = [[0,1,2,3,4,5,6,7,8,9,10], [14,15,16,17,18,19,20]]
+	plot = 1# Change to 1 to have results plotted each iteration
+	save = 0
 	
 	for f in files:
 		for r in k_ranges:
