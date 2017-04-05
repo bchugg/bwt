@@ -2,4 +2,7 @@
 \beamer@sectionintoc {2}{Our Approach}{5}{0}{1}
 \beamer@subsectionintoc {2}{1}{Runtime Analysis}{9}{0}{1}
 \beamer@sectionintoc {3}{Results}{12}{0}{2}
-\beamer@sectionintoc {4}{Conclusion}{13}{0}{3}
+\beamer@subsectionintoc {3}{1}{Runtimes}{12}{0}{2}
+\beamer@subsectionintoc {3}{2}{Scores}{14}{0}{2}
+\beamer@sectionintoc {4}{Conclusion}{16}{0}{3}
+\beamer@sectionintoc {5}{Extensions}{17}{0}{4}

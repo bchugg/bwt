@@ -60,9 +60,9 @@ def testAndPlot(fasta_file, num_sequences, krange, params):
 	if len(params)>1 : name += '_'+str(n)+'seqs_'+params[1]
 	k_local_ave = list(map(lambda x: x[0], averages))
 	rna_ave = list(map(lambda x: x[1], averages))
-	plot_scores(krange, k_local_ave,rna_ave, params)
+	plot_scores(krange, k_local_ave,rna_ave, name, params)
 	time_ratio = list(map(lambda x: x[0]/float(x[1]), times))
-	plot_times(krange, time_ratio, title, params)
+	plot_times(krange, time_ratio, name, params)
 
 def plot_scores(krange, k_local_ave, rna_ave, name, params):
 	plt.plot(krange, k_local_ave, 'go', label = 'k-Local Folding')
@@ -102,8 +102,8 @@ def main():
 	#files = ["data/rna.fasta"]
 	num_seqs = 20
 	k_ranges = [[0,1,2,3,4,5,6,7,8,9,10], [14,15,16,17,18,19,20]]
-	plot = 1# Change to 1 to have results plotted each iteration
-	save = 0
+	plot = 0# Change to 1 to have results plotted each iteration
+	save = 1
 	
 	for f in files:
 		for r in k_ranges:

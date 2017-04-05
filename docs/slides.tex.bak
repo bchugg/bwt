@@ -1,11 +1,10 @@
 \documentclass{beamer}
-\usetheme{Berkeley}
-\usecolortheme{dove}
+\usetheme{Hannover}
+%\usecolortheme{dove}
 \usepackage{graphicx}
 \usepackage{algpseudocode}
-\usepackage[font={footnotesize}]{caption}
+\usepackage{subfig}
 \usepackage{mathrsfs}
-\usepackage{subfigure}
 \newcommand{\A}{\texttt{A}}
 \newcommand{\G}{\texttt{G}}
 \newcommand{\U}{\texttt{U}}
@@ -66,13 +65,13 @@ It's clear that the runtime is $O(n^3)$.
 \begin{frame}
 \section{Our Approach}
 \frametitle{$k$-Local Folding}
-\rf returns the mathematically optimal alignment under the energy minimization model. Therefore, any new approach cannot hope to beat the scores, but only improve the running time. \\
+\rf returns the mathematically optimal alignment under the energy minimization model. Therefore, any new approach cannot hope to beat the scores, but only improve the running time. \s
 
 Idea: Subsequences of an RNA strand which are (near) palindromes of each other are likely to be a good match. Pair these regions and pass the leftover segments to \rf. 
 \end{frame}
 
 \begin{frame}
-\frametitle{k-Local Folding}
+\frametitle{\klf}
 Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and a parameter $k$, runs a local alignment algorithm on the strand to find $k$ high scoring --- and disjoint --- palindromic regions of $r$. It then passes the remaining unpaired regions to \rf to be folded as usual.
 \end{frame}
 
@@ -108,16 +107,14 @@ Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and
 
 \begin{frame}
 \subsection{Runtime Analysis}
-\frametitle{$k$-Local Folding: Runtime Analysis}
+\frametitle{\klf: Runtime Analysis}
 Fix an RNA strand $r$ with length $n$. 
-\begin{lemma}
-Let $\al$ be the set of local alignments found. Finding $k$ disjoint local alignments of $r$ takes time 
-\[O\left(\left(n-\sum_{A\in\al}\ell_A\right)^2\log k\right),\]
-where $\ell_A$ is the length of an alignment $A\in\al$. 
+\begin{lemma}[1]
+Let $\al$ be the set of local alignments found. Finding $k$ disjoint local alignments of $r$ takes time $O(n^2\log k)$. 
 \end{lemma}
-\begin{lemma}
+\begin{lemma}[2]
 \klf runs in time
-\[O\left(\left(n-\sum_{A\in\al}\ell_A\right)^3+\left(n-\sum_{A\in\al}\ell_A\right)^2\log k\right).\]
+\[O\left(\left(n-\sum_{A\in\al}\ell_A\right)^3+n^2\log k\right),\] where $\ell_A$ is the length of an alignment $A\in\al$. 
 \end{lemma}
 \end{frame}
 
@@ -138,28 +135,67 @@ However, our hypothesis was that there may a difference in the run times in prac
 
 \begin{frame}
 \section{Results}
-Time Results: 
-
+\subsection{Runtimes}
+\frametitle{Results: Runtimes} 
+<Kind of Data - Kenny?>
 \begin{figure}
 \centering
-\begin{subfigure}
-\centering
-\includegraphics[scale=0.5]{../figures/TIME_k0-8_20seqs_rna.png}
-\end{subfigure}
-\begin{subfigure}
-\centering
-\includegraphics[scale=0.5]{../figures/TIME_k0-8_20seqs_5sRNA.png}
-\end{subfigure}
+\subfloat[$k\in\{0,1,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/TIME_k0-10_20seqs_rna.png}}
+\subfloat[$k\in\{14,\ldots,20\}$]{\includegraphics[scale=0.32]{../figures/TIME_k14-20_20seqs_rna.png}}
 \end{figure}
 \end{frame}
 
 \begin{frame}
+\frametitle{Results: Runtimes}
+Ciliate RNA data.
+\begin{figure}
+\subfloat[$k\in\{0,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/TIME_k0-10_20seqs_ciliateRna.png}}
+\subfloat[$k\in\{14,\ldots,20\}$]{\includegraphics[scale=0.32]{../figures/TIME_k14-20_20seqs_ciliateRna.png}}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\subsection{Scores}
+\frametitle{Results: Scores}
+<Type of Data>
+\begin{figure}
+\centering
+\subfloat[$k\in\{0,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k0-10_20seqs_rna.png}}
+\subfloat[$k\in\{14,\ldots,20\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k14-20_20seqs_rna.png}}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Results: Runtimes}
+Ciliate RNA data.
+\begin{figure}
+\subfloat[$k\in\{0,\ldots,10\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k0-10_20seqs_ciliateRna.png}}
+\subfloat[$k\in\{14,\ldots,20\}$]{\includegraphics[scale=0.32]{../figures/SCORE_k14-20_20seqs_ciliateRna.png}}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
 \section{Conclusion}
+\frametitle{Remarks}
+\begin{enumerate}
+\item Results look fairly invariant under different data. 
+\item \klf may be best used as a preprocessing step for traditonal  RNA folding algorithms for regions which are likely hairpinned. 
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\section{Extensions}
 \frametitle{Extensions and Further Research}
 \begin{enumerate}
+\item Can we speed up klf by being smarter with our data structures? Tempting to only do local alignment once ... 
 \item Modify \klf to report possible pseudoknots 
 \item Compare \klf to the Four Russians method of speeding up Nussinov.
-\item  Probabilistic Approach
+\item  Probabilistic (Viterbi-like) Approach
+\item Providing better bounds on the runtime based on the expected number of palindromic like regions found on an alignment. 
 \end{enumerate}
 \end{frame}
 
