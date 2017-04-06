@@ -5,12 +5,13 @@
 \usepackage{algpseudocode}
 \usepackage{subfig}
 \usepackage{mathrsfs}
+\usepackage{xspace}
 \newcommand{\A}{\texttt{A}}
 \newcommand{\G}{\texttt{G}}
 \newcommand{\U}{\texttt{U}}
 \newcommand{\C}{\texttt{C}}
-\newcommand{\klf}{\textsc{k-Local Folding} }
-\newcommand{\rf}{\textsc{Nussinov} }
+\newcommand{\klf}{\textsc{k-Local Folding}\xspace}
+\newcommand{\rf}{\textsc{Nussinov}\xspace}
 \newcommand{\s}{\vspace{1cm}}
 \newcommand{\al}{\mathscr{A}}
 \renewcommand{\qedsymbol}{$\blacktriangleleft$}
@@ -65,10 +66,10 @@ It's clear that the runtime is $O(n^3)$.
 
 \begin{frame}
 \section{Our Approach}
-\frametitle{$k$-Local Folding}
+\frametitle{\klf}
 \rf returns the mathematically optimal alignment under the energy minimization model. Therefore, any new approach cannot hope to beat the scores, but only improve the running time. \s
 
-Idea: Subsequences of an RNA strand which are (near) palindromes of each other are likely to be a good match. Pair these regions and pass the leftover segments to \rf. 
+\textbf{Idea}: Subsequences of an RNA strand which are (near) palindromes of each other are likely to be a good match. Pair these regions and pass the leftover segments to \rf. 
 \end{frame}
 
 \begin{frame}
@@ -89,7 +90,7 @@ Formally, we define an algorithm \klf which takes as input an RNA strand $r$ and
 \State Call Local Alignment on $s$ and $\overline{s}$.
 \If{Local alignment found}
 \State Remove the aligned regions from $s$
-\State Push all unmatched regions of $S$ back onto stack
+\State Push all unmatched regions of $s$ back onto stack
 \EndIf 
 \EndWhile
 \State Call \rf on all unmatched regions of $r$. 
@@ -152,7 +153,7 @@ In the extreme case, suppose $r$ is a perfect palindrome. Then we do $O(n^2)$ wo
 \section{Results}
 \subsection{Runtimes}
 \frametitle{Results: Runtimes} 
-Each trial was run with 20 random sequences, and the results were taken as the average of the results. 
+Each trial was run with 20 random sequences, and the results were taken as the average of those trials. 
 The following data is for 16S Ribosomal Subunit RNA. 
 \begin{figure}
 \centering
@@ -195,7 +196,7 @@ Ciliate Telomerase RNA data.
 
 \begin{frame}
 \section{Conclusion}
-\frametitle{Remarks}
+\frametitle{Concluding Remarks}
 \begin{enumerate}
 \item Results look fairly invariant under different data. 
 \item \klf may be best used as a preprocessing step for traditonal  RNA folding algorithms for regions which are likely hairpinned. 
@@ -209,10 +210,14 @@ Ciliate Telomerase RNA data.
 \begin{enumerate}
 \item Can we speed up \klf by being smarter with our data structures? Tempting to only do local alignment once ... 
 \item Modify \klf to report possible pseudoknots 
-\item Compare \klf to the Four Russians method of speeding up Nussinov.
+\item Implement \klf to use the Four Russians speedup of \rf. 
 \item  Probabilistic (Viterbi-like) Approach
 \item Providing better bounds on the runtime based on the expected number of palindromic like regions found on an alignment. 
 \end{enumerate}
+\end{frame}
+
+\begin{frame}
+The code and slides can be found at \url{https://github.com/bchugg/bwt}. 
 \end{frame}
 
 \end{document}
