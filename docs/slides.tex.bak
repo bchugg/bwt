@@ -5,12 +5,13 @@
 \usepackage{algpseudocode}
 \usepackage{subfig}
 \usepackage{mathrsfs}
+\usepackage{xspace}
 \newcommand{\A}{\texttt{A}}
 \newcommand{\G}{\texttt{G}}
 \newcommand{\U}{\texttt{U}}
 \newcommand{\C}{\texttt{C}}
-\newcommand{\klf}{\textsc{k-Local Folding} }
-\newcommand{\rf}{\textsc{Nussinov} }
+\newcommand{\klf}{\textsc{k-Local Folding}\xspace}
+\newcommand{\rf}{\textsc{Nussinov}\xspace}
 \newcommand{\s}{\vspace{1cm}}
 \newcommand{\al}{\mathscr{A}}
 \renewcommand{\qedsymbol}{$\blacktriangleleft$}
@@ -209,7 +210,7 @@ Ciliate Telomerase RNA data.
 \begin{enumerate}
 \item Can we speed up \klf by being smarter with our data structures? Tempting to only do local alignment once ... 
 \item Modify \klf to report possible pseudoknots 
-\item Compare \klf to the Four Russians method of speeding up Nussinov.
+\item Implement \klf to use the Four Russians speedup of \rf. 
 \item  Probabilistic (Viterbi-like) Approach
 \item Providing better bounds on the runtime based on the expected number of palindromic like regions found on an alignment. 
 \end{enumerate}

@@ -168,17 +168,21 @@ For $k=0$, as expected the ratio is approximately 1:1, since \klf is not actuall
 \end{figure}
 \newpage
 
-For $k=0$, the scores are identical as is expected. How $k$ increases, we see a significant decrease in the scores. This can be explained by recalling that \rf is mathemtically optimal. As we greedily align more subregions of the RNA sequence, we veer further away from the global alignment returned by \rf, hence our 
-
-\subsection*{Discussion Of Results}
-
+For $k=0$, the scores are identical as is expected. As $k$ increases, we see a significant decrease in the scores. This can be explained by recalling that \rf is mathemtically optimal. As we greedily align more subregions of the RNA sequence, we veer further away from the global alignment returned by \rf, hence our score decreases. 
 
 \section{Conclusion}
 
 From the two data sets tested, it looks as though \klf does indeed beat \rf in terms of runtime. However, as $k$ increases, the score returned by \klf decreases. As such, we propose \klf as only a potential preprocessing step when an increase in speed is more important than a precise score. 
+
+
 \section{Extensions and Further Research}
-1. Run tests against folded RNA to see what value of $k$ best captures pseudo-knot structure. 
-2. Probabilistic (viterbi) methods. 
+There are several questions which arise from this research. 
+\begin{enumerate}
+\item Can we decrease the runtime of \klf if we choose better data structures?
+\item If we know a priori that a specific RNA strand contains pseudoknots, we presume that can \klf be modified to capture this structure. 
+\item Implement \klf using the Four Russians speedup for \rf. 
+\item Can we implement the \klf in a probabilistic setting using an HMM, similarly to local alignment?
+\end{enumerate}
 
 
 \bibliographystyle{plain}
